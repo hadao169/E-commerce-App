@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 

@@ -1,4 +1,6 @@
-import "./globals.css";
+import { AuthProvider } from '@/context/AuthContext';
+import { CartProvider } from '@/context/CartContext';
+import "@/styles/globals.css";
 
 export const metadata = {
   title: "Create Next App",
@@ -8,7 +10,13 @@ export const metadata = {
 export default function AppLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <AuthProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

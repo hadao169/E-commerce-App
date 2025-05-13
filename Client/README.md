@@ -1,3 +1,58 @@
+# E-commerce Client Application
+
+## Folder Structure
+
+```
+src/
+├── app/                    # Next.js 13+ App Router
+│   ├── (auth)/            # Authentication routes (login, register, etc.)
+│   ├── (home)/            # Public routes
+│   ├── (protected)/       # Protected routes requiring authentication
+│   ├── admin/             # Admin-only routes
+│   ├── products/          # Product-related routes
+│   └── layout.js          # Root layout
+│
+├── components/            # React components
+│   ├── auth/             # Authentication related components
+│   ├── common/           # Shared components (buttons, inputs, etc.)
+│   ├── layouts/          # Layout components
+│   └── ui/               # UI components (cards, modals, etc.)
+│
+├── hooks/                # Custom React hooks
+│   ├── useAuth.js       # Authentication hook
+│   ├── useCart.js       # Shopping cart hook
+│   └── useProducts.js   # Products hook
+│
+├── lib/                  # Utility libraries
+│   ├── constants.ts     # Constants and configuration
+│   └── utils.ts         # Helper functions
+│
+├── services/            # API services
+│   ├── api.ts          # Base API configuration
+│   ├── auth.ts         # Authentication service
+│   └── products.ts     # Products service
+│
+├── store/              # State management
+│   ├── cart.store.ts   # Cart state
+│   └── user.store.ts   # User state
+│
+├── styles/             # Global styles
+│   └── globals.css     # Global CSS
+│
+└── types/              # TypeScript type definitions
+    ├── auth.ts         # Auth-related types
+    └── product.ts      # Product-related types
+```
+
+## Key Features
+
+- **App Router Structure**: Uses Next.js 13+ App Router with organized route groups
+- **Component Organization**: Modular component structure with clear separation of concerns
+- **Type Safety**: Full TypeScript support
+- **State Management**: Centralized state management
+- **API Integration**: Organized API services
+- **Authentication**: Protected routes and auth components
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

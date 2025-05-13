@@ -8,13 +8,12 @@ import Menu from "./mobileMenu";
 import Searchbar from "./searchbar";
 import Link from "next/link";
 import searchSuggestions from "./trendingSearch";
-import Cartbutton from "./cartButton";
-import Userbutton from "./userButotn";
+import CartButton from "./cartButton";
+import UserButton from "./userButton";
 
 const Header = () => {
   return (
-    <header
-      className={`bg-orange-500 w-full fixed xl:px-[18%] px-6 pb-3 text-white text-[15px] transition-opacity duration-200`}>
+    <header className=" bg-orange-600 w-full fixed xl:px-[18%] px-6 pb-3 text-white text-[15px] transition-opacity duration-200">
       <div>
         {/* Phần trên search bar */}
         <div className="flex items-center justify-between pb-2">
@@ -29,30 +28,28 @@ const Header = () => {
           </div>
           <div className="hidden md:flex items-center">
             <LanguageSwitcher />
-            <Userbutton />
+            <UserButton />
           </div>
         </div>
 
         {/* Phần dưới search bar */}
         <div className="flex items-start justify-between md:gap-8">
-          <div className="flex gap-2">
+          <Link href="/" className="flex gap-2">
             <SiShopee className="text-[45px]" />
             <h1 className="self-end text-[30px]">Shopee</h1>
-          </div>
+          </Link>
 
           {/* Searchbar */}
-          <div className="w-full max-w-[800px] min-w-[100px]">
-            <div className="hidden md:block">
-              <Searchbar />
-              <ul className="hidden md:flex text-xs gap-3 mt-1">
-                {searchSuggestions.map((suggestion, index) => (
-                  <li key={index}>{suggestion}</li>
-                ))}
-              </ul>
-            </div>
+          <div className="w-full max-w-[800px] min-w-[100px] hidden md:block">
+            <Searchbar />
+            <ul className="hidden md:flex text-xs gap-3 mt-2">
+              {searchSuggestions.map((suggestion, index) => (
+                <li key={index}>{suggestion}</li>
+              ))}
+            </ul>
           </div>
-          <Link href="#" className="hidden md:flex">
-            <Cartbutton />
+          <Link href="/cart" className="hidden md:flex mt-2">
+            <CartButton />
           </Link>
           <Menu />
         </div>

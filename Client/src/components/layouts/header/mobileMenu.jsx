@@ -1,31 +1,3 @@
-// import Link from "next/link";
-// import { FaRegWindowClose } from "react-icons/fa";
-
-// const MobileMenu = ({ onCloseMenu, openMenu }) => {
-//   const menuOpen = openMenu ? "translate-x-0 " : "translate-x-[100%]";
-
-//   const navItems = [];
-//   return (
-//     <ul
-//       className={`flex md:hidden flex-col items-start gap-4 py-20 px-[6%] fixed -right-6 top-0 w-[50%] z-50 h-screen transition duration-500 bg-orange-500 ${menuOpen}`}>
-//       <div className="absolute right-10 top-6" onClick={onCloseMenu}>
-//         <FaRegWindowClose className="text-2xl opacity-70"/>
-//       </div>
-//       {navItems.map((item, index) => (
-//         <li key={index} className="text-[18px]">
-//           <Link
-//             href={item.href}
-//             className="hover:opacity-80 duration-300"
-//             onClick={onCloseMenu}>
-//             {item.label}
-//           </Link>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };
-
-// export default MobileMenu;
 import { EllipsisVertical } from "lucide-react";
 import {
   Sheet,
@@ -36,13 +8,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import LanguageSwitcher from "./language_switcher";
-import Cartbutton from "./cartButton";
-import Userbutton from "./userButotn";
+import CartButton from "./cartButton";
+import UserButton from "./userButton";
+import Link from "next/link";
 
 const Menu = () => {
   return (
     <nav className="md:hidden">
-  
       <Sheet>
         <SheetTrigger className="mt-3 cursor-pointer">
           <EllipsisVertical className="h-6 w-6" />
@@ -55,11 +27,13 @@ const Menu = () => {
             </div>
           </SheetHeader>
           <LanguageSwitcher />
-          <div className="flex items-end gap-2 ml-3">
-            <Cartbutton />
-          </div>
+          <Link href="/cart">
+            <div className="flex items-end gap-2 ml-3">
+              <CartButton />
+            </div>
+          </Link>
           <div className="ml-3">
-            <Userbutton />
+            <UserButton />
           </div>
         </SheetContent>
       </Sheet>

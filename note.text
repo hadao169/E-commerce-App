@@ -1,0 +1,14 @@
+App:
++ Framework: Next.js 15, React 19
++ UI/Styling: Shadcn, Tailwind, react-icons, framer-motion(optional)
++ Database: MongoDB, moongoose
++ Authentication/Authorization: next-auth
++ Signin/Signup: react-hook-form, next-auth, zod
+	- Zod to validate email/password
++ Validate data: moongoose, zod(for TS)/Joi(more suitable for JS)
++ Payment: stripe/
++ Deployment: Vercel,
++ State-management:Zustand
+
+Backend:
++ Node.js, express.js

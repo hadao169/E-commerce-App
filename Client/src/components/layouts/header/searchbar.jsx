@@ -20,7 +20,7 @@ const Searchbar = () => {
       />
       <button
         type="submit"
-        className="absolute top-1 right-2 flex items-center rounded bg-orange-500 py-1 px-3 text-sm text-white shadow-sm hover:opacity-70 transition-all cursor-pointer">
+        className="absolute top-1.25 right-2 flex items-center rounded bg-orange-500 py-1 px-3 text-sm text-white shadow-sm hover:opacity-70 transition-all cursor-pointer">
         Search
       </button>
     </form>

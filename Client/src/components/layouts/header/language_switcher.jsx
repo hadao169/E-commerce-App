@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { CiGlobe } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 
-const LanguageSwitcher = (props) => {
+const LanguageSwitcher = () => {
   const [Language, setLanguage] = React.useState("English");
   return (
     <DropdownMenu>
