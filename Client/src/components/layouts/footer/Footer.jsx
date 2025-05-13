@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
+import DropdownMenuCountry from "./dropdown_countries";
 
 const iconComponents = {
   FaFacebook,
@@ -98,7 +99,7 @@ const Footer = () => {
       {/* Below section */}
       <div className="border-t border-gray-300 mt-6 text-sm flex items-center justify-between pt-4">
         <p>© 2025 Ha Dao. All Rights Reserved .</p>
-        <div className="flex gap-1">
+        <div className="hidden md:flex gap-1">
           <div>{countries.title}:</div>
           <ul className="flex gap-2">
             {countries.names.map((name) => (
@@ -107,6 +108,9 @@ const Footer = () => {
               </li>
             ))}
           </ul>
+        </div>
+        <div className="md:hidden">
+          <DropdownMenuCountry />
         </div>
       </div>
     </footer>
