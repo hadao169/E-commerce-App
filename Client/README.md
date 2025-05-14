@@ -2,7 +2,7 @@
 
 ## Folder Structure
 
-```
+<!-- ```
 src/
 ├── app/                    # Next.js 13+ App Router
 │   ├── (auth)/            # Authentication routes (login, register, etc.)
@@ -42,7 +42,7 @@ src/
 └── types/              # TypeScript type definitions
     ├── auth.ts         # Auth-related types
     └── product.ts      # Product-related types
-```
+``` -->
 
 ## Key Features
 
