@@ -43,25 +43,25 @@ This application provides a complete e-commerce solution with product browsing, 
   - Role-based access control
 
 - **Product Management**
-
+<!-- 
   - Browse products by categories
   - Advanced search and filtering
-  - Product details with images, descriptions, and reviews
+  - Product details with images, descriptions, and reviews -->
 
 - **Shopping Experience**
-
+<!-- 
   - Add to cart functionality
   - Wishlist management
-  - Responsive product viewing
+  - Responsive product viewing -->
 
 - **Checkout Process**
-
+<!-- 
   - Secure payment processing with Stripe
   - Order history and tracking
-  - Email notifications
+  - Email notifications -->
 
-- **Internationalization**
-  - Multi-language support with next-intl
+<!-- - **Internationalization**
+  - Multi-language support with next-intl -->
 
 ## 🚀 Getting Started
 
