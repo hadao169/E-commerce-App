@@ -48,13 +48,22 @@ export default function SignupForm() {
           Sign up
         </button>
       </form>
-      <div className="flex items-center justify-center text-[14px] gap-1 mt-4">
-        <p>Have an account?</p>
-        <Link
-          href="/signin"
-          className="text-orange-600 hover:underline font-semibold">
-          Log in
-        </Link>
+      <div className="flex flex-col items-center">
+        {/* Sign in/sign up logic using gmail*/}
+        <div className="text-[12px] text-center w-4/5 mt-2">
+          <p>
+            By signing up, you agree to Shopee's{" "}
+            <Link href="/policy" className="text-orange-600">Terms of Service & Privacy Policy</Link>
+          </p>
+        </div>
+        <div className="flex items-center justify-center text-[14px] gap-1 mt-4">
+          <p>Have an account?</p>
+          <Link
+            href="/signin"
+            className="text-orange-600 hover:underline font-semibold">
+            Log in
+          </Link>
+        </div>
       </div>
     </div>
   );
