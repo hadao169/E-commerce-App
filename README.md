@@ -94,12 +94,12 @@ This application provides a complete e-commerce solution with product browsing, 
    ```
 
 4. Create a `.env` file in the server directory with the following variables:
-   ```
+   <!-- ```
    NODE_ENV=development
    PORT=5000
    JWT_SECRET=your_jwt_secret
    STRIPE_SECRET_KEY=your_stripe_secret_key
-   ```
+   ``` -->
 
 ### Running the Application
 
@@ -123,6 +123,3 @@ This application provides a complete e-commerce solution with product browsing, 
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 👥 Contributors
-
-- [Your Name](https://github.com/yourusername) - Initial work
