@@ -17,7 +17,7 @@ This application provides a complete e-commerce solution with product browsing, 
 - **State Management**: [Zustand](https://github.com/pmndrs/zustand)
 - **Form Handling**: [React Hook Form](https://react-hook-form.com/) with [Zod](https://github.com/colinhacks/zod) validation
 - **UI Components**:
-  - [Radix UI](https://www.radix-ui.com/) primitives
+  - [Shadcn UI](https://ui.shadcn.com/)
   - [Lucide React](https://lucide.dev/) icons
   - [React Icons](https://react-icons.github.io/react-icons/)
 - **Deployment**: [Vercel]
@@ -30,9 +30,9 @@ This application provides a complete e-commerce solution with product browsing, 
   - [JSON Web Tokens](https://jwt.io/) (JWT)
   - [Passport.js](http://www.passportjs.org/)
   - [bcrypt.js](https://github.com/dcodeIO/bcrypt.js/) for password hashing
-- **API Validation**: [Joi](https://joi.dev/)
-- **Email Services**: [Nodemailer](https://nodemailer.com/)
-- **Payment Processing**: [Stripe](https://stripe.com/)
+- **API Validation**: [Zod](https://github.com/colinhacks/zod)
+- **Email Services**: is not implemented yet
+- **Payment Processing**: is not implemented yet
 
 ## ✨ Features
 
