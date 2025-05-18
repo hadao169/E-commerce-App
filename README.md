@@ -53,7 +53,6 @@ This application provides a complete e-commerce solution with product browsing, 
   - Add to cart functionality
   - Wishlist management
   - Responsive product viewing -->
-
 - **Checkout Process**
 <!-- 
   - Secure payment processing with Stripe
