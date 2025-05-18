@@ -26,7 +26,7 @@ const LanguageSwitcher = () => {
           <IoIosArrowDown />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 bg-white border-none ">
+      <DropdownMenuContent className="w-40 bg-white border-none ">
         <DropdownMenuLabel>Language</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={Language} onValueChange={setLanguage}>

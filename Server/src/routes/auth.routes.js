@@ -1,12 +1,19 @@
-import express from 'express';
-import { authController } from '../controllers/auth.controller.js';
-import { authMiddleware } from '../middleware/auth.middleware.js';
+import express from "express";
+import {
+  register,
+  login,
+  logout,
+  refreshToken,
+  getCurrentUser,
+} from "../controllers/auth.controller.js";
+import { authenticateJWT, authenticateLocal } from "../config/passport.js";
 
 const router = express.Router();
 
-router.post('/register', authController.register);
-router.post('/login', authController.login);
-router.get('/me', authMiddleware, authController.getCurrentUser);
-router.post('/logout', authMiddleware, authController.logout);
+router.post("/register", register);
+router.post("/login", authenticateLocal, login);
+router.post("/logout", authenticateJWT, logout);
+router.post("/refresh-token", refreshToken);
+router.get("/user", authenticateJWT, getCurrentUser);
 
-export default router; 
+export default router;

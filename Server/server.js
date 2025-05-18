@@ -1,36 +1,32 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import authRoutes from './routes/auth.routes.js';
-import productRoutes from './routes/product.routes.js';
-import { errorHandler } from './middleware/error.middleware.js';
-
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import config from "./src/config/index.js";
+import { errorHandler } from "./src/middleware/error.middleware.js";
+import authRoutes from "./src/routes/auth.routes.js";
+import "./src/config/database.js";
 dotenv.config();
 
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true
-}));
+app.use(cookieParser());
 app.use(express.json());
+app.use(morgan("dev"));
+app.use(cors({ origin: config.clientUrl, credentials: true }));
+// Serve static files
+app.use(express.static("public"));
+
+// Set security HTTP headers
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
-
+app.use("/api/auth", authRoutes);
 // Error handling
 app.use(errorHandler);
 
-// Database connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('MongoDB connection error:', err));
-
 // Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-}); 
+app.listen(config.port, () => {
+  console.log(`Server is running on port ${config.port}`);
+});

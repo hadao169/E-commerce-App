@@ -1,7 +1,20 @@
+"use client";
 import React from "react";
 import SignUpForm from "@/components/Auth/SignupForm";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
-const SignUpPage = (props) => {
+const SignUpPage = () => {
+  const router = useRouter();
+  const { register } = useAuth();
+
+  const action = async (userData) => {
+    const success = await register(userData);
+    if (success) {
+      router.push("/signin");
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row px-4 md:px-8 xl:px-[10%] py-6 xl:py-10 items-center gap-6">
       <div className="w-full xl:w-1/2 flex justify-center">
@@ -12,7 +25,7 @@ const SignUpPage = (props) => {
         />
       </div>
       <div className="w-full xl:w-1/2">
-        <SignUpForm />
+        <SignUpForm action={action} />
       </div>
     </div>
   );

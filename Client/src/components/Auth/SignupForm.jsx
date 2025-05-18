@@ -5,33 +5,20 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema } from "@/lib/validator";
+import { Loader2 } from "lucide-react";
 
-export default function SignupForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export default function SignupForm({ action }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit = async (data) => {
-    setIsSubmitting(true);
-    try {
-      console.log(data);
-      // Implement your signup logic here
-      // await signUp(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="max-w-sm mx-auto bg-white rounded-lg px-5 py-8 shadow-md">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(action)}>
         <h2 className="text-xl font-semibold mb-6">Create an account</h2>
 
         <div className="space-y-4">
@@ -119,9 +106,16 @@ export default function SignupForm() {
 
         <button
           type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-orange-600 text-white py-3 rounded-md cursor-pointer hover:opacity-90 transition-opacity duration-300 mt-6 disabled:opacity-70 disabled:cursor-not-allowed">
-          {isSubmitting ? "Creating account..." : "Sign up"}
+          className="w-full bg-orange-600 text-white py-3 rounded-md cursor-pointer hover:opacity-90 transition-opacity duration-300 mt-6 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          disabled={isSubmitting}>
+          {isSubmitting ? (
+            <React.Fragment>
+              <Loader2 className="animate-spin ml-4" />
+              Signing up...
+            </React.Fragment>
+          ) : (
+            "SIGN UP"
+          )}
         </button>
 
         <div className="text-[12px] text-center w-full mt-4">

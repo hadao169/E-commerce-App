@@ -1,36 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signinSchema } from "@/lib/validator";
+import { Loader2 } from "lucide-react";
 
-const SignInForm = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+const SignInForm = ({ action }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
+    getValues,
   } = useForm({
     resolver: zodResolver(signinSchema),
   });
 
-  const onSubmit = async (data) => {
-    setIsSubmitting(true);
-    try {
-      console.log(data);
-      // Implement your signin logic here
-      // await signIn(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="max-w-sm mx-auto bg-white rounded-lg px-5 py-8 shadow-md">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(action)}>
         <h2 className="text-xl font-semibold mb-6">Log in</h2>
 
         <div className="space-y-4">
@@ -85,8 +74,15 @@ const SignInForm = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-orange-600 text-white py-3 rounded-md cursor-pointer hover:opacity-90 transition-opacity duration-300 disabled:opacity-70 disabled:cursor-not-allowed">
-          {isSubmitting ? "Logging in..." : "LOG IN"}
+          className="w-full bg-orange-600 text-white py-3 rounded-md cursor-pointer hover:opacity-90 transition-opacity duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+          {isSubmitting ? (
+            <React.Fragment>
+              <Loader2 className="animate-spin" />
+              Logging in...
+            </React.Fragment>
+          ) : (
+            "LOG IN"
+          )}
         </button>
       </form>
 

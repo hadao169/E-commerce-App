@@ -1,16 +1,19 @@
-import axios from 'axios';
-
+import axios from "axios";
+import { redirect } from "next/navigation";
+import { refreshTokenRequest } from "./api/auth";
+import { jwtDecode } from "jwt-decode";
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api',
+  baseURL: "http://localhost:4000/api",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 // Request interceptor
+// add token to headers before sending request
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -21,16 +24,32 @@ api.interceptors.request.use(
   }
 );
 
+//Refresh token
+// api.interceptors.response.use(
+//   (response) => response,
+//   async () => {
+//     // convert token expiration time to milliseconds (*1000)
+//     const expiresAt = jwtDecode(localStorage.getItem("token")).exp * 1000;
+//     if (Date.now() >= expiresAt - 1000 * 60 * 10) {
+//       const data = await refreshTokenRequest();
+//       localStorage.setItem("refreshedToken", data.accessToken);
+//       return api(error.config);
+//     }
+//     return Promise.reject(error);
+//   }
+// );
+
 // Response interceptor
+// check if token is expired, if so, redirect to login
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
+      localStorage.removeItem("token");
+      redirect("/login");
     }
     return Promise.reject(error);
   }
 );
 
-export default api; 
+export default api;
