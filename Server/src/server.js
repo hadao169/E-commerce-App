@@ -3,10 +3,10 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import config from "./src/config/index.js";
-import { errorHandler } from "./src/middleware/error.middleware.js";
-import authRoutes from "./src/routes/auth.routes.js";
-import "./src/config/database.js";
+import config from "./config/index.js";
+import { errorHandler } from "./middleware/error.middleware.js";
+import authRoutes from "./routes/auth.routes.js";
+import "./config/database.js";
 dotenv.config();
 
 const app = express();
