@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
     "test": "node --test",
     "lint": "eslint .",
-    "start:test": "node server.js"
+    "start:test": "node server/server.js"
   },
   "type": "module",
   "author": "",

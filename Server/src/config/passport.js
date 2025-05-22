@@ -52,18 +52,20 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        // Find user by email
         const user = await User.findOne({ email });
+
+        if (!user) {
+          return done(null, false, { message: "Invalid email or password" });
+        }
+
         const isPasswordValid = await comparePassword(password, user.password);
-        console.log("User:", user);
-        // User not found
-        if (!user || !isPasswordValid) {
+        if (!isPasswordValid) {
           return done(null, false, { message: "Invalid email or password" });
         }
 
         return done(null, user);
       } catch (error) {
-        errors("Local authentication error:", error.message);
+        console.error("Local authentication error:", error.message);
         return done(error);
       }
     }

@@ -12,7 +12,6 @@ const SignInForm = ({ action }) => {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-    getValues,
   } = useForm({
     resolver: zodResolver(signinSchema),
   });
@@ -34,11 +33,6 @@ const SignInForm = ({ action }) => {
               className={`w-full border ${errors.email ? "border-red-500" : "border-gray-300"} rounded-md py-3 px-2 focus:outline-none focus:ring-2 focus:ring-orange-500`}
               placeholder="Email"
             />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
-              </p>
-            )}
           </div>
 
           <div>
@@ -53,11 +47,10 @@ const SignInForm = ({ action }) => {
               {...register("password")}
               className={`w-full border ${errors.password ? "border-red-500" : "border-gray-300"} rounded-md py-3 px-2 focus:outline-none focus:ring-2 focus:ring-orange-500`}
               placeholder="Password"
-              aria-invalid={errors.password ? "true" : "false"}
             />
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.password.message}
+                {errors.password?.message}
               </p>
             )}
           </div>

@@ -3,7 +3,6 @@ import { errors } from "../utils/logger.js";
 import { signupSchema } from "../utils/validator.js";
 import {
   generateAccessToken,
-  verifyAccessToken,
   generateRefreshToken,
   verifyRefreshToken,
 } from "../config/jwt.js";
@@ -13,10 +12,10 @@ import { hashPassword } from "../utils/hashPassword.js";
 export const register = async (req, res) => {
   try {
     const { email, username, password } = req.body;
-    const { error } = signupSchema.safeParse(req.body);
-    if (error) {
-      return res.status(400).json({ error: error.message });
-    }
+    // const { error } = signupSchema.safeParse(req.body);
+    // if (error) {
+    //   return res.status(400).json({ error: error.message });
+    // }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
