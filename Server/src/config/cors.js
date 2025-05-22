@@ -10,10 +10,7 @@ const corsOptions = {
       callback(null, true);
     }
     return callback(
-      new errors(
-        StatusCodes.FORBIDDEN,
-        `🚫 Origin ${origin} not allowed by CORS.`
-      )
+      errors(StatusCodes.FORBIDDEN, `🚫 Origin ${origin} not allowed by CORS.`)
     );
   },
   optionsSuccessStatus: 200,
