@@ -5,9 +5,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "lint": "eslint .",
-    "postinstall": "npm run build"
-  },
+    "lint": "eslint ."
+    },
   "type": "module",
   "author": "",
   "license": "ISC",
