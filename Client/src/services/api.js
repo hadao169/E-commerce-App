@@ -2,8 +2,10 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 import { refreshTokenRequest } from "./api/auth";
 import { jwtDecode } from "jwt-decode";
+import { apiRoot } from "../lib/constants";
+
 const api = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: apiRoot,
   headers: {
     "Content-Type": "application/json",
   },

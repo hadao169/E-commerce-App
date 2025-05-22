@@ -1,33 +1,26 @@
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { Strategy as LocalStrategy } from "passport-local";
-import dotenv from "dotenv";
 import User from "../models/user.model.js";
 import { errors } from "../utils/logger.js";
 import { comparePassword } from "../utils/hashPassword.js";
+import env from "./env.js"; // Dùng export default nên KHÔNG cần destructure
 
-dotenv.config();
-
-// JWT Secret from environment variables
-const JWT_SECRET = process.env.JWT_SECRET;
-
-// Configure JWT Bearer Strategy
+// JWT Strategy configuration
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: JWT_SECRET,
+  secretOrKey: env.JWT_SECRET,
 };
 
 passport.use(
   new JwtStrategy(jwtOptions, async (payload, done) => {
     try {
-      // Find the user by id from JWT payload
       const user = await User.findById(payload.id);
       if (!user) {
         return done(null, false, { message: "User not found" });
       }
 
-      // Check if token was issued before user's tokenVersion was incremented
-      // This allows token invalidation when user logs out or changes password
+      // Invalidate token if tokenVersion is outdated
       if (
         payload.tokenVersion !== undefined &&
         payload.tokenVersion < user.tokenVersion
@@ -43,7 +36,7 @@ passport.use(
   })
 );
 
-// Configure Local Strategy (username/password auth)
+// Local strategy: for email and password login
 passport.use(
   new LocalStrategy(
     {
@@ -65,17 +58,17 @@ passport.use(
 
         return done(null, user);
       } catch (error) {
-        console.error("Local authentication error:", error.message);
+        errors("Local authentication error:", error.message);
         return done(error);
       }
     }
   )
 );
 
-// Middleware to authenticate with JWT Bearer token
+// Middleware to protect routes using JWT
 export const authenticateJWT = passport.authenticate("jwt", { session: false });
 
-// Middleware for local authentication (username/password)
+// Middleware for login via email/password
 export const authenticateLocal = passport.authenticate("local", {
   session: false,
 });
