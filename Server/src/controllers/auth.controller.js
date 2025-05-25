@@ -1,21 +1,32 @@
 import User from "../models/user.model.js";
 import { errors } from "../utils/logger.js";
-import { signupSchema } from "../utils/validator.js";
 import {
   generateAccessToken,
   generateRefreshToken,
   verifyRefreshToken,
 } from "../config/jwt.js";
 import { hashPassword } from "../utils/hashPassword.js";
+import env from "../config/env.js";
+import { z } from "zod";
+
+// Validation schemas
+const registerSchema = z.object({
+  email: z.string().email(),
+  username: z.string().min(3).max(50),
+  password: z.string().min(6),
+});
+
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+});
 
 // register new user
 export const register = async (req, res) => {
   try {
-    const { email, username, password } = req.body;
-    // const { error } = signupSchema.safeParse(req.body);
-    // if (error) {
-    //   return res.status(400).json({ error: error.message });
-    // }
+    const validatedData = registerSchema.parse(req.body);
+    const { email, username, password } = validatedData;
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
@@ -23,49 +34,115 @@ export const register = async (req, res) => {
         message: "User with this email already exists",
       });
     }
+
     const hashedPassword = await hashPassword(password);
-    await User.create({
+    const user = await User.create({
       email,
       username,
       password: hashedPassword,
     });
+
     return res.status(201).json({
       success: true,
       message: "User created successfully",
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+      },
     });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid input data",
+        errors: error.errors,
+      });
+    }
     errors("Error creating user:", error.message);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
 
 // login user
 export const login = async (req, res) => {
   try {
-    // Because user is authenticated in passport, req.user is populated
+    const validatedData = loginSchema.parse(req.body);
     const user = req.user;
+
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
+
     return res
       .status(200)
       .cookie("refreshToken", refreshToken, {
         httpOnly: true,
-        secure: true,
-        sameSite: "strict",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
-      .header("Authorization", accessToken)
+      .header("Authorization", `Bearer ${accessToken}`)
       .json({
+        success: true,
         user: {
           id: user._id,
           username: user.username,
           email: user.email,
         },
         accessToken,
-        refreshToken,
       });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid input data",
+        errors: error.errors,
+      });
+    }
     errors("Error logging in:", error.message);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+// google login
+export const googleLogin = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication failed",
+      });
+    }
+
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
+
+    res
+      .status(200)
+      .cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      })
+      .header("Authorization", `Bearer ${accessToken}`);
+
+    const redirectUrl = new URL(env.CLIENT_URL);
+    redirectUrl.searchParams.set("token", accessToken);
+    return res.redirect(redirectUrl.toString());
+  } catch (error) {
+    errors("Google login error:", error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
 
@@ -76,10 +153,18 @@ export const logout = async (req, res) => {
     await User.findByIdAndUpdate(user._id, {
       tokenVersion: user.tokenVersion + 1,
     });
-    return res.status(200).json({ message: "Logged out successfully" });
+
+    res.clearCookie("refreshToken");
+    return res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
   } catch (error) {
     errors("Error logging out:", error.message);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
 
@@ -88,18 +173,25 @@ export const refreshToken = async (req, res) => {
   try {
     const refreshToken = req.cookies["refreshToken"];
     if (!refreshToken) {
-      return res.status(401).json({ error: "No refresh token" });
+      return res.status(401).json({
+        success: false,
+        message: "No refresh token provided",
+      });
     }
 
     const decoded = verifyRefreshToken(refreshToken);
     const user = await User.findById(decoded.id);
 
     if (!user) {
-      return res.status(401).json({ error: "User not found" });
+      return res.status(401).json({
+        success: false,
+        message: "User not found",
+      });
     }
 
     const newAccessToken = generateAccessToken(user);
     return res.status(200).json({
+      success: true,
       accessToken: newAccessToken,
       user: {
         id: user._id,
@@ -109,7 +201,10 @@ export const refreshToken = async (req, res) => {
     });
   } catch (error) {
     errors("Error refreshing token:", error.message);
-    return res.status(401).json({ error: "Invalid refresh token" });
+    return res.status(401).json({
+      success: false,
+      message: "Invalid refresh token",
+    });
   }
 };
 
@@ -118,13 +213,19 @@ export const getCurrentUser = async (req, res) => {
   try {
     const user = req.user;
     return res.status(200).json({
-      id: user._id,
-      email: user.email,
-      username: user.username,
-      role: user.role,
+      success: true,
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+      },
     });
   } catch (error) {
     errors("Error getting user info:", error.message);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };

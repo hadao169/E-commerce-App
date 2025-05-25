@@ -6,12 +6,13 @@ import { useAuth } from "@/context/AuthContext";
 
 const SignUpPage = () => {
   const router = useRouter();
-  const { register } = useAuth();
+  const { register, login } = useAuth();
 
   const action = async (userData) => {
     const success = await register(userData);
     if (success) {
-      router.push("/signin");
+      await login(userData.email, userData.password);
+      router.push("/");
     }
   };
 

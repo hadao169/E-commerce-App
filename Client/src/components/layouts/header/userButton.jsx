@@ -2,6 +2,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -17,6 +18,7 @@ import { IoIosArrowDown } from "react-icons/io";
 
 const UserButton = () => {
   const { user, logout } = useAuth();
+  const router = useRouter();
 
   if (!user) {
     return (
@@ -48,6 +50,7 @@ const UserButton = () => {
             onClick={async (e) => {
               e.preventDefault();
               await logout();
+              return router.push("/");
             }}
             className={"cursor-pointer"}>
             Sign out

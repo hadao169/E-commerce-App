@@ -7,16 +7,19 @@ import authRoutes from "./routes/auth.routes.js";
 import "./config/database.js";
 import cors from "cors";
 import corsOptions from "./config/cors.js";
+import helmet from "helmet";
 
 const app = express();
+
+// Security middleware
+app.use(helmet());
+app.use(cors(corsOptions));
 
 // Middleware
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-app.use(cors(corsOptions));
-// Serve static files
-app.use(express.static("public"));
 
 // Set security HTTP headers
 
@@ -26,6 +29,7 @@ app.use("/api/auth", authRoutes);
 app.use(errorHandler);
 
 // Start server
-app.listen(env.PORT, () => {
-  console.log(`Server is running on port ${env.PORT}`);
+const PORT = env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

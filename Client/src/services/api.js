@@ -43,15 +43,15 @@ api.interceptors.request.use(
 
 // Response interceptor
 // check if token is expired, if so, redirect to login
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      redirect("/login");
-    }
-    return Promise.reject(error);
-  }
-);
+// api.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     if (error.response?.status === 401) {
+//       localStorage.removeItem("token");
+//       redirect("/login");
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 export default api;
