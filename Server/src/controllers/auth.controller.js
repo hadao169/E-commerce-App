@@ -7,25 +7,11 @@ import {
 } from "../config/jwt.js";
 import { hashPassword } from "../utils/hashPassword.js";
 import env from "../config/env.js";
-import { z } from "zod";
-
-// Validation schemas
-const registerSchema = z.object({
-  email: z.string().email(),
-  username: z.string().min(3).max(50),
-  password: z.string().min(6),
-});
-
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
-});
 
 // register new user
 export const register = async (req, res) => {
   try {
-    const validatedData = registerSchema.parse(req.body);
-    const { email, username, password } = validatedData;
+    const { email, username, password } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -52,13 +38,6 @@ export const register = async (req, res) => {
       },
     });
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid input data",
-        errors: error.errors,
-      });
-    }
     errors("Error creating user:", error.message);
     return res.status(500).json({
       success: false,
@@ -70,7 +49,6 @@ export const register = async (req, res) => {
 // login user
 export const login = async (req, res) => {
   try {
-    const validatedData = loginSchema.parse(req.body);
     const user = req.user;
 
     const accessToken = generateAccessToken(user);
@@ -95,13 +73,6 @@ export const login = async (req, res) => {
         accessToken,
       });
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid input data",
-        errors: error.errors,
-      });
-    }
     errors("Error logging in:", error.message);
     return res.status(500).json({
       success: false,

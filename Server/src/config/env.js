@@ -1,6 +1,13 @@
 import "dotenv/config";
 
-const requiredEnv = ["JWT_SECRET", "JWT_REFRESH_SECRET", "MONGODB_URI"];
+const requiredEnv = [
+  "JWT_SECRET",
+  "JWT_REFRESH_SECRET",
+  "MONGODB_URI",
+  "GOOGLE_CLIENT_ID",
+  "GOOGLE_CLIENT_SECRET",
+  "GOOGLE_CALLBACK_URL",
+];
 
 for (const key of requiredEnv) {
   if (!process.env[key]) {
@@ -19,10 +26,7 @@ const env = {
   MONGODB_URI: process.env.MONGODB_URI,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-  GOOGLE_CALLBACK_URL:
-    process.env.GOOGLE_CALLBACK_URL ||
-    "http://localhost:4000/api/auth/oauth2/redirect/google",
-  SERVER_URL: process.env.SERVER_URL || "http://localhost:4000",
+  GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL,
 };
 
 export default env;
