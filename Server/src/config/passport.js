@@ -107,7 +107,7 @@ passport.use(
       }
     }
   )
-);
+)
 // Middleware to protect routes using JWT
 export const authenticateJWT = passport.authenticate("jwt", { session: false });
 
