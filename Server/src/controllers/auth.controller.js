@@ -60,9 +60,7 @@ export const login = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
-      .header("Authorization", `Bearer ${accessToken}`)
       .json({
         success: true,
         user: {
@@ -95,17 +93,17 @@ export const googleLogin = async (req, res) => {
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
 
-    res
-      .status(200)
-      .cookie("refreshToken", refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      })
-      .header("Authorization", `Bearer ${accessToken}`);
+    res.status(200).cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+    });
 
-    const redirectUrl = new URL(env.CLIENT_URL);
+    const redirectUrl = new URL(
+      process.env.NODE_ENV === "production"
+        ? env.CLIENT_URL
+        : "http://localhost:3000"
+    );
     redirectUrl.searchParams.set("token", accessToken);
     return res.redirect(redirectUrl.toString());
   } catch (error) {
@@ -142,10 +140,9 @@ export const logout = async (req, res) => {
 // refresh token
 export const refreshToken = async (req, res) => {
   try {
-    const refreshToken = req.cookies["refreshToken"];
+    const refreshToken = req.cookies?.refreshToken;
     if (!refreshToken) {
       return res.status(401).json({
-        success: false,
         message: "No refresh token provided",
       });
     }
@@ -161,6 +158,7 @@ export const refreshToken = async (req, res) => {
     }
 
     const newAccessToken = generateAccessToken(user);
+
     return res.status(200).json({
       success: true,
       accessToken: newAccessToken,
