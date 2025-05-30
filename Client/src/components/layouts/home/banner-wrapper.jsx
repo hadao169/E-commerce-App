@@ -1,6 +1,6 @@
 import React from "react";
 import HomeCarousel from "./carousel-slider";
-import { quickMenu } from "@/components/layouts/home/quickAcessMenu";
+import { quickMenu } from "@/components/layouts/home/homeMenuData";
 
 const BannerWrapper = () => {
   return (

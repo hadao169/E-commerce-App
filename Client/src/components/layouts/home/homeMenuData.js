@@ -50,3 +50,14 @@ export const quickMenu = [
     href: "/bank-promotions",
   },
 ];
+
+export const categories = [
+  {
+    icon: "/images/categories/women-apparel.png",
+    label: "Women's Apparel",
+  },
+  {
+    icon: "/images/categories/mobile-gadgets.png",
+    label: "Mobile & Gadgets",
+  },
+];
