@@ -15,10 +15,9 @@ export default function AppLayout({ children }) {
       <body className="antialiased flex flex-col min-h-screen gap-2">
         <AuthProvider>
           <CartProvider>
-            <Header />
             <main className="main">{children}</main>
-            <Footer />
           </CartProvider>
+          <Footer />
         </AuthProvider>
       </body>
     </html>

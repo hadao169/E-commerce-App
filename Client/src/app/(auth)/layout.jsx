@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { SiShopee } from "react-icons/si";
-import Footer from "@/components/layouts/footer/Footer";
 export default function AuthLayout({ children }) {
   return (
     <section>
@@ -15,7 +14,6 @@ export default function AuthLayout({ children }) {
         <span>Need help?</span>
       </header>
       <div className="w-full bg-[#d0011b]"> {children}</div>
-      <Footer />
     </section>
   );
 }
