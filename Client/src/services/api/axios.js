@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiRoot } from "../../lib/constants";
+import { apiRoot } from "@/constants/apiRoot";
 import { refreshTokenRequest, forceLogoutRequest } from "./auth";
 
 // Create an Axios instance with default config

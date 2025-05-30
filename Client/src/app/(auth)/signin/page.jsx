@@ -2,7 +2,7 @@
 import React from "react";
 import SignInForm from "@/components/Auth/SigninForm";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/lib/context/AuthContext";
 import { useState } from "react";
 
 const SignInPage = () => {

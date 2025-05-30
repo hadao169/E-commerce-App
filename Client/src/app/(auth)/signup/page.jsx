@@ -2,7 +2,7 @@
 import React from "react";
 import SignUpForm from "@/components/Auth/SignupForm";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/lib/context/AuthContext";
 
 const SignUpPage = () => {
   const router = useRouter();

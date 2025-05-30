@@ -1,6 +1,6 @@
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
-import socialLinks from "constants/socialLinks";
+import socialLinks from "@/constants/socialLinks";
 
 export const footerData = [
   {

@@ -1,5 +1,7 @@
-import { AuthProvider } from "@/context/AuthContext";
-import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/lib/context/AuthContext";
+import { CartProvider } from "@/lib/context/CartContext";
+import Header from "@/components/layouts/header/Header";
+import Footer from "@/components/layouts/footer/Footer";
 import "@/styles/globals.css";
 
 export const metadata = {
@@ -10,11 +12,27 @@ export const metadata = {
 export default function AppLayout({ children }) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased flex flex-col min-h-screen gap-2">
         <AuthProvider>
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            <Header />
+            <main className="main">{children}</main>
+            <Footer />
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>
   );
 }
+// import Header from "@/components/layouts/header/Header";
+// import Footer from "@/components/layouts/footer/Footer";
+
+// export default async function HomeLayout({ children }) {
+//   return (
+//     <div className="flex flex-col min-h-screen scroll-smooth">
+//       <Header />
+//       <main className="flex-1 flex flex-col">{children}</main>
+//       <Footer />
+//     </div>
+//   );
+// }

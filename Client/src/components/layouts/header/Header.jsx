@@ -1,7 +1,7 @@
 "use client";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiShopee } from "react-icons/si";
-import socialLinks from "constants/socialLinks";
+import socialLinks from "@/constants/socialLinks";
 import LanguageSwitcher from "./language_switcher";
 // import MobileMenu from "./mobileMenu";
 import Menu from "./mobileMenu";
@@ -13,7 +13,7 @@ import UserButton from "./userButton";
 
 const Header = () => {
   return (
-    <header className=" bg-orange-600 w-full fixed xl:px-[18%] px-6 pb-3 text-white text-[15px] transition-opacity duration-200">
+    <header className=" bg-orange-600 w-full xl:px-[18%] px-6 pb-3 text-white text-[15px] transition-opacity duration-200 z-50">
       <div>
         {/* Phần trên search bar */}
         <div className="flex items-center justify-between pb-2">
