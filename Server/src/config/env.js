@@ -1,5 +1,5 @@
-import "dotenv/config";
-
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
 const requiredEnv = [
   "JWT_SECRET",
   "JWT_REFRESH_SECRET",
