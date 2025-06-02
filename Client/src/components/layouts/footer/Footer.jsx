@@ -15,7 +15,7 @@ const iconComponents = {
 
 const Footer = () => {
   return (
-    <footer className="w-full xl:px-[18%] px-6 py-8 bg-gray-100 text-gray-500 text-[12px]">
+    <footer className="w-full xl:px-[18%] px-6 py-8 bg-white text-gray-500 text-[12px]">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {footerData.map((section) => (
           <div key={section.title}>

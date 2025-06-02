@@ -1,10 +1,10 @@
 import React from "react";
 import HomeCarousel from "./carousel-slider";
-import { quickMenu } from "@/components/layouts/home/homeMenuData";
+import Categories from "@/components/layouts/home/catergories";
 
 const BannerWrapper = () => {
   return (
-    <div className="w-full xl:px-[18%] px-6 pb-3 text-[15px] transition-opacity duration-200 z-50 mt-6 mb-2">
+    <div className="w-full xl:px-[18%] px-6 text-[15px] transition-opacity duration-200 z-50">
       <div className="flex flex-col md:flex-row w-full gap-1.5">
         {/* Carousel bên trái */}
         <HomeCarousel />
@@ -22,21 +22,10 @@ const BannerWrapper = () => {
           />
         </div>
       </div>
-      {/* <div>
-        {quickMenu.map((item, index) => (
-          <a
-            key={index}
-            href={item.href}
-            className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded transition-colors duration-200">
-            <img
-              src={item.icon}
-              alt={item.label}
-              className="w-6 h-6 object-contain"
-            />
-            <span>{item.label}</span>
-          </a>
-        ))}
-      </div> */}
+
+      <div>
+        <Categories />
+      </div>
     </div>
   );
 };

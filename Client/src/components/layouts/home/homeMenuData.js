@@ -53,11 +53,35 @@ export const quickMenu = [
 
 export const categories = [
   {
-    icon: "/images/categories/women-apparel.png",
-    label: "Women's Apparel",
+    icon: "/images/categories/women-clothes.png",
+    label: "Women's Clothes",
   },
   {
     icon: "/images/categories/mobile-gadgets.png",
     label: "Mobile & Gadgets",
+  },
+  {
+    icon: "/images/categories/home-appliances.png",
+    label: "Home Appliances",
+  },
+  {
+    icon: "/images/categories/sports-outdoors.png",
+    label: "Sports & Outdoors",
+  },
+  {
+    icon: "/images/categories/jewellery-accessories.png",
+    label: "Jewellry",
+  },
+  {
+    icon: "/images/categories/mens-wear.png",
+    label: "Men's clothes",
+  },
+  {
+    icon: "/images/categories/furniture.png",
+    label: "Furniture",
+  },
+  {
+    icon: "/images/categories/watches.png",
+    label: "Watches",
   },
 ];

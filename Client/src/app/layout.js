@@ -12,10 +12,10 @@ export const metadata = {
 export default function AppLayout({ children }) {
   return (
     <html lang="en">
-      <body className="antialiased flex flex-col min-h-screen gap-2">
+      <body className="antialiased flex flex-col min-h-screen">
         <AuthProvider>
           <CartProvider>
-            <main className="main">{children}</main>
+            <main className="main ">{children}</main>
           </CartProvider>
           <Footer />
         </AuthProvider>
