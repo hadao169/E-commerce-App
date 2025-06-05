@@ -1,4 +1,5 @@
-export const products = [
+import slugify from "./src/utils/formatters.js";
+const data = [
   {
     name: "American Football",
     slug: "american-football",
@@ -621,7 +622,7 @@ export const products = [
       4: 1,
       5: 1,
     },
-    
+
     reviews: [],
   },
   {
@@ -679,7 +680,7 @@ export const products = [
   {
     name: "Tropical Earring",
     slug: "tropical-earring",
-    category: "women-jewellery",  
+    category: "women-jewellery",
     image:
       "https://cdn.dummyjson.com/product-images/womens-jewellery/tropical-earring/thumbnail.webp",
     price: 19.99,
@@ -860,4 +861,27 @@ export const products = [
   },
 ];
 
-console.log(products.length);
+export const products = data.map((product) => {
+  // Update category mappings
+  const categoryMapping = {
+    Jewelry: "women-jewellery",
+    "Women's Clothes": "women-dresses",
+    "Men's Clothes": "men-shirts",
+    Watches: "men-watches",
+    "Sports & Outdoors": "sports-accessories",
+    Smartphones: "smartphones",
+    Furniture: "furniture",
+  };
+
+  const isClothing = ["women-dresses", "men-shirts"].includes(product.category);
+  const isSmartphone = product.category === "smartphones";
+
+  return {
+    ...product,
+    slug: slugify(product.name),
+    category: categoryMapping[product.category] || product.category,
+    sizes: isClothing ? ["S", "M", "L", "XL"] : [],
+    colors: isSmartphone ? ["Blue", "Black", "White"] : [],
+  };
+});
+// console.log(products.length);

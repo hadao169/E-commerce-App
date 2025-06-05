@@ -95,7 +95,7 @@ export const googleLogin = async (req, res) => {
 
     res.status(200).cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       sameSite: "lax",
     });
 
@@ -104,6 +104,8 @@ export const googleLogin = async (req, res) => {
         ? env.CLIENT_URL
         : "http://localhost:3000"
     );
+
+    // const redirectUrl = new URL(redirectUrl);
     redirectUrl.searchParams.set("token", accessToken);
     return res.redirect(redirectUrl.toString());
   } catch (error) {

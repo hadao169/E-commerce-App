@@ -14,7 +14,8 @@ This application provides a complete e-commerce solution with product browsing, 
 - **Framework**: [Next.js](https://nextjs.org/) (v15.3.1)
 - **UI Library**: [React](https://reactjs.org/) (v19.0.0)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) (v4.1.5)
-- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+  <!-- - **State Management**: [Zustand](https://github.com/pmndrs/zustand) -->
+  <!-- - **State Management**: [Context Hook] -->
 - **Form Handling**: [React Hook Form](https://react-hook-form.com/) with [Zod](https://github.com/colinhacks/zod) validation
 - **UI Components**:
   - [Shadcn UI](https://ui.shadcn.com/)
@@ -43,18 +44,18 @@ This application provides a complete e-commerce solution with product browsing, 
   - Role-based access control
 
 - **Product Management**
-<!-- 
+<!--
   - Browse products by categories
   - Advanced search and filtering
   - Product details with images, descriptions, and reviews -->
 
 - **Shopping Experience**
-<!-- 
+<!--
   - Add to cart functionality
   - Wishlist management
   - Responsive product viewing -->
 - **Checkout Process**
-<!-- 
+<!--
   - Secure payment processing with Stripe
   - Order history and tracking
   - Email notifications -->
@@ -121,4 +122,3 @@ This application provides a complete e-commerce solution with product browsing, 
 ## 📝 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-

@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema(
     },
     colors: {
       type: [String],
-      enum: ["red", "blue", "green", "black", "white"],
+      enum: ["Red", "Blue", "Green", "Black", "White"],
       default: [],
     },
     isPublished: {
@@ -85,37 +85,37 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-productSchema.methods.calculateAvgRating = function () {
-  const distribution = this.rateDistribution;
+// productSchema.methods.calculateAvgRating = function () {
+//   const distribution = this.rateDistribution;
 
-  console.log("Rate Distribution:", distribution);
-  // Tổng số rating
-  const totalRatings = Object.values(distribution).reduce(
-    (sum, count) => sum + count,
-    0
-  );
+//   console.log("Rate Distribution:", distribution);
+//   // Tổng số rating
+//   const totalRatings = Object.values(distribution).reduce(
+//     (sum, count) => sum + count,
+//     0
+//   );
 
-  if (totalRatings === 0) return 0;
+//   if (totalRatings === 0) return 0;
 
-  // Tính tổng điểm: (1*count1 + 2*count2 + 3*count3 + 4*count4 + 5*count5)
-  const weightedSum = Object.entries(distribution).reduce(
-    (sum, [rating, count]) => {
-      return sum + Number(rating) * count;
-    },
-    0
-  );
+//   // Tính tổng điểm: (1*count1 + 2*count2 + 3*count3 + 4*count4 + 5*count5)
+//   const weightedSum = Object.entries(distribution).reduce(
+//     (sum, [rating, count]) => {
+//       return sum + Number(rating) * count;
+//     },
+//     0
+//   );
 
-  // Tính trung bình và làm tròn đến 1 chữ số thập phân
-  return Number((weightedSum / totalRatings).toFixed(1));
-};
+//   // Tính trung bình và làm tròn đến 1 chữ số thập phân
+//   return Number((weightedSum / totalRatings).toFixed(1));
+// };
 
-// Middleware để tự động cập nhật avgRating trước khi lưu
-productSchema.pre("save", async function (next) {
-  if (this.isModified("rateDistribution")) {
-    this.avgRating = this.calculateAvgRating();
-  }
-  next();
-});
+// // Middleware để tự động cập nhật avgRating trước khi lưu
+// productSchema.pre("save", async function (next) {
+//   if (this.isModified("rateDistribution")) {
+//     this.avgRating = this.calculateAvgRating();
+//   }
+//   next();
+// });
 
 const Product = mongoose.model("Product", productSchema);
 export default Product;
