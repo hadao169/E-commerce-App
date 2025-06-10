@@ -7,7 +7,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-  CarouselApi, // Import the CarouselApi type
+  CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -38,11 +38,11 @@ export default function HomeCarousel() {
     <Carousel
       setApi={setApi}
       className="w-full md:w-2/3"
-      // plugins={[
-      //   Autoplay({
-      //     delay: 2000,
-      //   }),
-      // ]}
+      plugins={[
+        Autoplay({
+          delay: 2000,
+        }),
+      ]}
     >
       <CarouselPrevious className={navBtnClass} />
       <div className="relative flex flex-col items-center w-full">
@@ -54,7 +54,7 @@ export default function HomeCarousel() {
                   src={src}
                   alt={`Slide ${index + 1}`}
                   className="w-full object-cover shadow-md"
-                  loading="lazy" // Added lazy loading
+                  loading="lazy"
                 />
               </CardContent>
             </CarouselItem>

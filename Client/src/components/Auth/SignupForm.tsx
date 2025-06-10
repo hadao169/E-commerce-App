@@ -125,7 +125,7 @@ export default function SignupForm({ action }: SignupFormProps) {
 
         <div className="text-[12px] text-center w-full mt-4">
           <p>
-            By signing up, you agree to Shopee's{" "}
+            By signing up, you agree to Shopee&apos;s{" "}
             <Link href="/policy" className="text-orange-600 hover:underline">
               Terms of Service & Privacy Policy
             </Link>
