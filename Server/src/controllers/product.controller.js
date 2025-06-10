@@ -8,3 +8,15 @@ export const getAllProducts = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+// GET /api/products/category/:category
+export const getProductByCategory = async (req, res) => {
+  const { slug } = req.params;
+
+  try {
+    const products = await Product.find({ category: slug });
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+};

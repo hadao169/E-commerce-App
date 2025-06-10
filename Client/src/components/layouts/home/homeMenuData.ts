@@ -55,33 +55,41 @@ export const categories = [
   {
     icon: "/images/categories/women-clothes.png",
     label: "Women's Clothes",
+    slug: "women-dresses",
   },
   {
     icon: "/images/categories/mobile-gadgets.png",
     label: "Smartphones",
+    slug: "smartphones",
   },
   {
     icon: "/images/categories/home-appliances.png",
     label: "Home Appliances",
+    slug: "women-dresses",
   },
   {
     icon: "/images/categories/sports-outdoors.png",
     label: "Sports & Outdoors",
+    slug: "sports-accessories",
   },
   {
     icon: "/images/categories/jewellery-accessories.png",
     label: "Jewellry",
+    slug: "women-dresses",
   },
   {
     icon: "/images/categories/mens-wear.png",
     label: "Men's clothes",
+    slug: "men-shirts",
   },
   {
     icon: "/images/categories/furniture.png",
     label: "Furniture",
+    slug: "furniture",
   },
   {
     icon: "/images/categories/watches.png",
     label: "Watches",
+    slug: "men-watches",
   },
 ];

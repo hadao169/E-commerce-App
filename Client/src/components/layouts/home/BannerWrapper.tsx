@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import HomeCarousel from "./CarouselSlider";
 import Category from "@/components/layouts/home/Catergory";
