@@ -34,17 +34,34 @@ const Price = (field: string) =>
       (val) => /^\d+(\.\d{2})?$/.test(val.toFixed(2)),
       `${field} must have exactly two decimal places (e.g., 49.99)`
     );
+
+const MongoId = z
+  .string()
+  .regex(/^[a-fA-F0-9]{24}$/, "Invalid MongoDB ObjectId");
 // Product
 export const ProductInputSchema = z.object({
+  id:MongoId,
   name: z.string().min(3),
   slug: z.string().min(3),
   category: z.string().min(1),
-  images: z.array(z.string()).min(1),
+  image: z.string().url({ message: "Image must be a valid URL" }),
   price: Price("Price"),
   description: z.string().min(1),
   isPublished: z.boolean(),
+  // listPrice: Price("List price"),
+  numSales: z.coerce.number().int().nonnegative(),
   countInStock: z.coerce.number().int().nonnegative(),
-  tags: z.array(z.string()).default([]),
+  tags: z.array(z.string()).default([]), // optional for filtering
   sizes: z.array(z.string()).default([]),
   colors: z.array(z.string()).default([]),
+  avgRating: z.coerce.number().min(0).max(5), // optional for filtering and sorting
+  numReviews: z.coerce.number().int().nonnegative(),
+  ratingDistribution: z
+    .array(z.object({ rating: z.number(), count: z.number() }))
+    .max(5), // store how many reviews for each rating (1-5)
+  // reviews: z.array(ReviewInputSchema).default([]),
+});
+
+export const ProductUpdateSchema = ProductInputSchema.extend({
+  _id: MongoId,
 });

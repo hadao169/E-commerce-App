@@ -1,17 +1,19 @@
 import { api, privateApi } from "./axios";
-import { LoginResponse, RegisterInput, User } from "@/types/auth";
+import { LoginResponse, RegisterInput, UserSchema } from "@/types/index";
 
-export const registerRequest = async (userData: RegisterInput): Promise<User> => {
-  const response = await privateApi.post("/auth/register", userData);
+// Register new user, returns user info
+export const registerRequest = async (userData: RegisterInput): Promise<{ user: UserSchema }> => {
+  const response = await privateApi.post<{ user: UserSchema }>("/auth/register", userData);
   return response.data;
 };
 
+// Login with email & password, returns user info + accessToken
 export const loginRequest = async (
   email: string,
   password: string
 ): Promise<LoginResponse> => {
   try {
-    const response = await privateApi.post("/auth/login", { email, password });
+    const response = await privateApi.post<LoginResponse>("/auth/login", { email, password });
     const { accessToken, user } = response.data;
     localStorage.setItem("token", accessToken);
     return { user, accessToken };
@@ -20,23 +22,28 @@ export const loginRequest = async (
   }
 };
 
-export const googleLoginRequest = () => {
-  window.location.href = "http://localhost:4000/api/auth/google";
+// Redirect to Google OAuth login
+export const googleLoginRequest = (): void => {
+  if (typeof window !== "undefined") {
+    window.location.href = "http://localhost:4000/api/auth/google";
+  }
 };
 
+// Logout user, clears token and calls backend logout
 export const logoutRequest = async (): Promise<void> => {
   try {
     await privateApi.post("/auth/logout");
-    localStorage.removeItem("token");
   } catch (error) {
     console.error("Logout error:", error);
+  } finally {
     localStorage.removeItem("token");
   }
 };
 
-export const getCurrentUserRequest = async (): Promise<User> => {
+// Get current logged-in user info
+export const getCurrentUserRequest = async (): Promise<{ user: UserSchema }> => {
   try {
-    const response = await privateApi.get("/auth/user");
+    const response = await privateApi.get<{ user: UserSchema }>("/auth/user");
     return response.data;
   } catch (error: any) {
     if (error?.response?.status === 401) {
@@ -46,9 +53,10 @@ export const getCurrentUserRequest = async (): Promise<User> => {
   }
 };
 
+// Refresh JWT token
 export const refreshTokenRequest = async (): Promise<{ accessToken: string }> => {
   try {
-    const response = await api.post(
+    const response = await api.post<{ accessToken: string }>(
       "/auth/refresh-token",
       {},
       { withCredentials: true }
@@ -62,6 +70,7 @@ export const refreshTokenRequest = async (): Promise<{ accessToken: string }> =>
   }
 };
 
+// Force logout on client side: clear token and redirect to signin page
 export const forceLogoutRequest = (): void => {
   localStorage.removeItem("token");
   if (typeof window !== "undefined") {

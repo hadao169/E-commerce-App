@@ -10,8 +10,8 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-export default [
-  ...compat.extends("next/core-web-vitals"),
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
@@ -26,7 +26,7 @@ export default [
       "@typescript-eslint": require("@typescript-eslint/eslint-plugin"),
     },
     rules: {
-      "@typescript-eslint/explicit-module-boundary-types": "off",
+      // "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         { argsIgnorePattern: "^_" },
@@ -34,3 +34,5 @@ export default [
     },
   },
 ];
+
+export default eslintConfig;

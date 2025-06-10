@@ -3,7 +3,7 @@ import { z } from "zod";
 const MongoId = z
   .string()
   .regex(/^[a-fA-F0-9]{24}$/, "Invalid MongoDB ObjectId");
-  
+
 const Price = (field) =>
   z.coerce
     .number()
@@ -74,7 +74,7 @@ export const ProductInputSchema = z.object({
   name: z.string().min(3),
   slug: z.string().min(3),
   category: z.string().min(1),
-  images: z.array(z.string()).min(1),
+  image: z.string().url({ message: "Image must be a valid URL" }),
   price: Price("Price"),
   description: z.string().min(1),
   isPublished: z.boolean(),

@@ -1,4 +1,5 @@
 export const apiRoot =
   process.env.NODE_ENV === "production"
-    ? "https://e-commerce-app-u16v.onrender.com"
+    ? process.env.NEXT_PUBLIC_API_URL
     : "http://localhost:4000/api";
+

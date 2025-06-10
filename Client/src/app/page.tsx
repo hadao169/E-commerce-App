@@ -1,11 +1,13 @@
 import BannerWrapper from "@/components/layouts/home/BannerWrapper";
-import Headers from "@/components/layouts/header/Header";
-import ProductCard from "@/components/product/ProductCard";
+import Header from "@/components/layouts/header/Header";
+import ProductGrid from "@/components/product/ProductGrid";
+import { getAllProducts } from "@/services/api/product";
 
-const Homepage = () => {
+const Homepage = async () => {
+  const products = await getAllProducts();
   return (
     <div className="bg-gray-100 pb-10">
-      <Headers />
+      <Header />
       <div className="  flex flex-col items-center gap-6">
         <div className="w-full bg-white z-50 py-5 responsive-padding-x text-[15px] transition-opacity duration-200">
           <BannerWrapper />
@@ -20,9 +22,9 @@ const Homepage = () => {
             DAILY DISCOVER
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 mt-2 px-1">
+          <div className="mt-2 px-2">
             {/* Render product cards */}
-            <ProductCard />
+            <ProductGrid products={products} />
           </div>
         </div>
       </div>

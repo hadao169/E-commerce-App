@@ -3,7 +3,8 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import env from "./config/env.js";
 import { errorHandler } from "./middleware/error.middleware.js";
-import authRoutes from "./routes/auth.routes.js";
+import authRouter from "./routes/auth.routes.js";
+import productRouter from "./routes/product.routes.js";
 import "./config/database.js";
 import cors from "cors";
 import corsOptions from "./config/cors.js";
@@ -24,7 +25,8 @@ app.use(morgan("dev"));
 // Set security HTTP headers
 
 // Routes
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRouter);
+app.use("/api/products", productRouter);
 // Error handling
 app.use(errorHandler);
 

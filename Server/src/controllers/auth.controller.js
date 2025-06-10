@@ -30,11 +30,11 @@ export const register = async (req, res) => {
 
     return res.status(201).json({
       success: true,
-      message: "User created successfully",
       user: {
         id: user._id,
         email: user.email,
         username: user.username,
+        role: user.role,
       },
     });
   } catch (error) {
@@ -184,7 +184,6 @@ export const getCurrentUser = async (req, res) => {
   try {
     const user = req.user;
     return res.status(200).json({
-      success: true,
       user: {
         id: user._id,
         email: user.email,

@@ -50,9 +50,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
       // get user and save to local storage
-      const userData = await getCurrentUserRequest();
-      if (!userData?.user) throw new Error("No user found");
-      setUser(userData.user);
+      const { user } = await getCurrentUserRequest();
+      console.log("userData", user);
+      if (!user) throw new Error("No user found");
+      setUser(user);
       setError(null);
     } catch (error) {
       console.error("Auth check error:", error);
@@ -114,8 +115,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const register = async (userData: UserSignupInput) => {
     try {
-      const response = await registerRequest(userData);
-      if (response?.success) {
+      const { user } = await registerRequest(userData);
+      if (user) {
         setError(null);
         return true;
       }

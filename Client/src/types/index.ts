@@ -11,10 +11,10 @@ export interface UserSchema {
   email: string;
   username: string;
   role: 'user' | 'admin';
-  emailVerified: boolean;
-  tokenVersion: number;
-  createdAt: string;
-  updatedAt: string;
+  emailVerified?: boolean;
+  tokenVersion?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 // API Response types
@@ -27,3 +27,16 @@ export interface ApiError {
   message: string;
   statusCode: number;
 }
+
+export type LoginResponse = {
+  user: UserSchema;
+  accessToken: string;
+};
+
+export type RegisterInput = {
+  id?: string;
+  username: string;
+  email: string;
+  password: string;
+};
+
