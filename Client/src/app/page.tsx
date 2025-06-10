@@ -4,6 +4,7 @@ import ProductGrid from "@/components/product/ProductGrid";
 import { getAllProducts } from "@/services/api/product";
 
 const Homepage = async () => {
+  // update limit field to determine how many items will be fetched
   const products = await getAllProducts();
   return (
     <div className="bg-gray-100 pb-10">

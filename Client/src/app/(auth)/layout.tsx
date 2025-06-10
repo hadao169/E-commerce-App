@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { ReactNode } from "react";
 import { SiShopee } from "react-icons/si";
-export default function AuthLayout({ children }) {
+export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <section>
       <header className="flex items-center justify-between xl:px-[18%] px-6 pt-3 pb-5 text-[15px] text-orange-600">

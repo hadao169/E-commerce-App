@@ -29,10 +29,10 @@ export const footerData = [
     ],
   },
   {
-    title: "FOLLOW US",
+    title: "FOLLOW ME",
     socials: [
-      { name: "Facebook", href: socialLinks.github },
-      { name: "Instagram", href: socialLinks.portfolio },
+      { name: "GitHub", href: socialLinks.github },
+      { name: "Portfolio", href: socialLinks.portfolio },
       { name: "LinkedIn", href: socialLinks.linkedin },
     ]
   },
