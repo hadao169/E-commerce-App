@@ -14,6 +14,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <body className="antialiased flex flex-col min-h-screen scroll-smooth">
         <AuthProvider>
           <CartProvider>
+            <div className="fixed bottom-2 right-2 text-xs font-mono bg-black text-white px-2 py-1 rounded z-50 pointer-events-none">
+              <div className="block sm:hidden">xs</div>
+              <div className="hidden sm:block md:hidden">sm</div>
+              <div className="hidden md:block lg:hidden">md</div>
+              <div className="hidden lg:block xl:hidden">lg</div>
+              <div className="hidden xl:block 2xl:hidden">xl</div>
+              <div className="hidden 2xl:block">2xl</div>
+            </div>
             <main className="main ">{children}</main>
           </CartProvider>
           <Footer />

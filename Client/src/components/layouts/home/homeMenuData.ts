@@ -65,7 +65,7 @@ export const categories = [
   {
     icon: "/images/categories/home-appliances.png",
     label: "Home Appliances",
-    slug: "women-dresses",
+    slug: "home-appliances",
   },
   {
     icon: "/images/categories/sports-outdoors.png",
@@ -75,12 +75,12 @@ export const categories = [
   {
     icon: "/images/categories/jewellery-accessories.png",
     label: "Jewellry",
-    slug: "women-dresses",
+    slug: "women-jewellery",
   },
   {
     icon: "/images/categories/mens-wear.png",
     label: "Men's clothes",
-    slug: "men-shirts",
+    slug: "mens-shirts",
   },
   {
     icon: "/images/categories/furniture.png",
@@ -90,6 +90,6 @@ export const categories = [
   {
     icon: "/images/categories/watches.png",
     label: "Watches",
-    slug: "men-watches",
+    slug: "mens-watches",
   },
 ];

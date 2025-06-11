@@ -40,7 +40,7 @@ const MongoId = z
   .regex(/^[a-fA-F0-9]{24}$/, "Invalid MongoDB ObjectId");
 // Product
 export const ProductInputSchema = z.object({
-  id:MongoId,
+  _id:MongoId,
   name: z.string().min(3),
   slug: z.string().min(3),
   category: z.string().min(1),

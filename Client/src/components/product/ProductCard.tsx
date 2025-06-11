@@ -1,16 +1,19 @@
 import { ProductInput } from "@/types";
+import Image from "next/image";
 type ProductProp = {
   product: ProductInput;
 };
 
 const ProductCard = ({ product }: ProductProp) => {
   return (
-    <div className="flex flex-col items-center  shadow-md bg-white hover:scale-102 hover:border-orange-500 border border-gray-100 transition-all duration-200 cursor-pointer overflow-hidden">
+    <div className="flex flex-col items-center rounded-md shadow-md bg-white hover:scale-102 hover:border-orange-500 border border-gray-100 transition-all duration-200 cursor-pointer overflow-hidden">
       <div className="w-full h-48 bg-gray-50 flex items-center justify-center overflow-hidden">
-        <img
+        <Image
           src={product.image}
           alt={product.name}
-          className="object-contain h-full w-full group-hover:scale-110 transition-transform duration-200"
+          width={400}
+          height={300}
+          className="object-contain group-hover:scale-110 transition-transform duration-200 h-4/5 w-full"
         />
       </div>
       <div className="px-3 py-3 w-full flex flex-col gap-2">

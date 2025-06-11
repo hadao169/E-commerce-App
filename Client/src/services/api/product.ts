@@ -20,3 +20,4 @@ export const getProductsByCategory = async (category: string): Promise<ProductIn
     throw error;
   }
 };
+
