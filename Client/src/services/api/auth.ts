@@ -1,6 +1,6 @@
 import { api, privateApi } from "./axios";
 import { LoginResponse, RegisterInput, UserSchema } from "@/types/index";
-
+import { errorMessage } from "@/lib/utils";
 // Register new user, returns user info
 export const registerRequest = async (userData: RegisterInput): Promise<{ user: UserSchema }> => {
   const response = await privateApi.post<{ user: UserSchema }>("/auth/register", userData);
@@ -17,9 +17,9 @@ export const loginRequest = async (
     const { accessToken, user } = response.data;
     localStorage.setItem("token", accessToken);
     return { user, accessToken };
-  } catch (error: any) {
-    throw new Error(error?.response?.data?.message || "Login failed");
-  }
+  } catch (error: unknown) {
+  throw new Error(errorMessage(error as Error));
+}
 };
 
 // Redirect to Google OAuth login
@@ -41,17 +41,26 @@ export const logoutRequest = async (): Promise<void> => {
 };
 
 // Get current logged-in user info
+interface AxiosErrorWithStatus {
+  response?: {
+    status?: number;
+    data?: string;
+  };
+}
+
 export const getCurrentUserRequest = async (): Promise<{ user: UserSchema }> => {
   try {
     const response = await privateApi.get<{ user: UserSchema }>("/auth/user");
     return response.data;
-  } catch (error: any) {
-    if (error?.response?.status === 401) {
+  } catch (error: unknown) {
+    const axiosError = error as AxiosErrorWithStatus;
+    if (axiosError.response?.status === 401) {
       localStorage.removeItem("token");
     }
     throw error;
   }
 };
+
 
 // Refresh JWT token
 export const refreshTokenRequest = async (): Promise<{ accessToken: string }> => {
