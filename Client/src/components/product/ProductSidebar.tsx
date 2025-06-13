@@ -28,7 +28,7 @@ const Sidebar = () => {
                 className={`lg:text-[14px] text-[12px] font-semibold flex items-center gap-2 ${
                   isActive && "text-orange-400"
                 }`}>
-                0{isActive && <ChevronRight size={12} strokeWidth={3} />}
+                {isActive && <ChevronRight size={12} strokeWidth={3} />}
                 {category.label}
               </Link>
             );
@@ -95,4 +95,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-  
