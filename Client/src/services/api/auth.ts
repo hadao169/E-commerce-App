@@ -48,18 +48,18 @@ interface AxiosErrorWithStatus {
   };
 }
 
-export const getCurrentUserRequest = async (): Promise<{ user: UserSchema }> => {
-  try {
-    const response = await privateApi.get<{ user: UserSchema }>("/auth/user");
-    return response.data;
-  } catch (error: unknown) {
-    const axiosError = error as AxiosErrorWithStatus;
-    if (axiosError.response?.status === 401) {
-      localStorage.removeItem("token");
+  export const getCurrentUserRequest = async (): Promise<{ user: UserSchema }> => {
+    try {
+      const response = await privateApi.get<{ user: UserSchema }>("/auth/user");
+      return response.data;
+    } catch (error: unknown) {
+      const axiosError = error as AxiosErrorWithStatus;
+      if (axiosError.response?.status === 401) {
+        localStorage.removeItem("token");
+      }
+      throw error;
     }
-    throw error;
-  }
-};
+  };
 
 
 // Refresh JWT token

@@ -26,9 +26,9 @@ const Sidebar = () => {
                 key={category.label}
                 href={`/category/${category.slug.toLowerCase()}`}
                 className={`lg:text-[14px] text-[12px] font-semibold flex items-center gap-2 ${
-                  isActive ? "text-orange-400" : "text-gray-800"
+                  isActive && "text-orange-400"
                 }`}>
-                {isActive && <ChevronRight size={12} strokeWidth={3} />}
+                0{isActive && <ChevronRight size={12} strokeWidth={3} />}
                 {category.label}
               </Link>
             );
@@ -85,7 +85,7 @@ const Sidebar = () => {
               className="w-20 px-2 py-1 border rounded text-sm"
             />
           </div>
-          <button className="w-full mt-1 px-3 py-1 bg-orange-500 text-white rounded text-sm hover:bg-orange-500">
+          <button className="w-fit mt-1 px-3 py-1 bg-orange-500 text-white rounded text-sm hover:bg-orange-500 cursor-pointer hover:opacity-80">
             Apply
           </button>
         </div>
@@ -95,3 +95,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+  
