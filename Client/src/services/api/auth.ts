@@ -13,7 +13,7 @@ export const loginRequest = async (
   password: string
 ): Promise<LoginResponse> => {
   try {
-    const response = await privateApi.post<LoginResponse>("/auth/login", { email, password });
+    const response = await privateApi.post<LoginResponse>("/auth/signin", { email, password });
     const { accessToken, user } = response.data;
     localStorage.setItem("token", accessToken);
     return { user, accessToken };
@@ -32,7 +32,7 @@ export const googleLoginRequest = (): void => {
 // Logout user, clears token and calls backend logout
 export const logoutRequest = async (): Promise<void> => {
   try {
-    await privateApi.post("/auth/logout");
+    await privateApi.post("/auth/signout");
   } catch (error) {
     console.error("Logout error:", error);
   } finally {
