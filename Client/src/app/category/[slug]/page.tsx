@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getProductsByCategory } from "@/services/api/product";
-import { ProductInput } from "@/types";
+import { ProductInput, SortOption } from "@/types";
 import ProductCard from "@/components/product/ProductCard";
 import Header from "@/components/layouts/header/Header";
 import DropdownMenu from "@/components/product/Dropdown-menu";
@@ -39,11 +39,8 @@ export default function ProductsPage() {
   }, [category, sort]);
 
   // Callback cho DropdownMenu
-  const handleSortChange = (sortOption: {
-    field: string;
-    order: "asc" | "desc";
-  }) => {
-    // updateSort([sortOption]);
+  const handleSortChange = (sortOption: SortOption) => {
+    updateSort(sortOption);
   };
 
   return (
@@ -62,16 +59,16 @@ export default function ProductsPage() {
             </button>
             <div className="hidden md:flex items-center gap-3">
               <button
-                className="btn"
+                className={`btn ${sort.field === "createdAt" ? "bg-orange-500" : "bg-white  "}`}
                 onClick={() => updateSort({ field: "createdAt" })}>
                 Latest
               </button>
               <button
-                className="btn"
+                className={`btn ${sort.field === "numSales" ? "bg-orange-500" : "bg-white"}`}
                 onClick={() => updateSort({ field: "numSales" })}>
                 Top sales
               </button>
-              <DropdownMenu onSortChange={handleSortChange} />
+              <DropdownMenu onSortChange={handleSortChange} sort={sort} />
             </div>
           </div>
 

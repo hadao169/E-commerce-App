@@ -1,10 +1,6 @@
 import { ProductInput } from '@/types/index';
 import { api } from './axios';
-
-type SortOption = {
-  field: string;
-  order?: 'asc' | 'desc';
-};
+import { SortOption } from '@/types/index';
 
 export const getAllProducts = async (): Promise<ProductInput[]> => {
   try {

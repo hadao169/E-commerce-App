@@ -75,7 +75,7 @@ body {
   }
 
   .btn{
-    @apply px-4 py-1.5 text-center bg-white text-sm  cursor-pointer hover:opacity-80 rounded
+    @apply px-4 py-1.5 text-center  text-sm  cursor-pointer hover:opacity-80 rounded 
   }
 
   .text-custom{

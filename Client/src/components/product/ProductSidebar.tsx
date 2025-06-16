@@ -1,18 +1,12 @@
 "use client";
 
-import { usePathname  } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Logs, ChevronRight, Star } from "lucide-react";
 import Link from "next/link";
 import { categories } from "../layouts/home/homeMenuData";
 import { useState } from "react";
 
-// type SortOption = {
-//   field: "price" | "avgRating" | "numSales" | "createdAt";
-//   order: "asc" | "desc";
-//   label: string;
-// };
-
-const Sidebar = ( ) => {
+const Sidebar = () => {
   const pathname = usePathname();
   const ratings = [5, 4, 3, 2, 1];
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });

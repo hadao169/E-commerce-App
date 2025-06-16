@@ -40,3 +40,8 @@ export type RegisterInput = {
   password: string;
 };
 
+export type SortOption = {
+  field: string;
+  order?: "asc" | "desc";
+}
+
