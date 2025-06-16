@@ -1,9 +1,5 @@
 import { ZodError } from "zod";
 
-/**
- * Validate request against Zod schema
- * @param {import("zod").AnyZodObject} schema
- */
 
 const validate = (schema) => {
   return async (req, res, next) => {

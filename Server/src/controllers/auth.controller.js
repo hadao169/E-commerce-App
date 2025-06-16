@@ -72,9 +72,9 @@ export const login = async (req, res) => {
       });
   } catch (error) {
     errors("Error logging in:", error.message);
-    return res.status(500).json({
+    return res.status(401).json({
       success: false,
-      message: "Internal server error",
+      message: "Invalid credentials",
     });
   }
 };

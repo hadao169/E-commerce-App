@@ -8,19 +8,20 @@ import ProductCard from "@/components/product/ProductCard";
 import Header from "@/components/layouts/header/Header";
 import DropdownMenu from "@/components/product/Dropdown-menu";
 import Sidebar from "@/components/product/ProductSidebar";
+import useSortProduct from "@/lib/hooks/useSortProduct";
 
 export default function ProductsPage() {
   const params = useParams();
   const category = params.slug as string;
   const [products, setProducts] = useState<ProductInput[]>([]);
-  const [notFound, setNotFound] = useState<boolean>(true);
+  const [notFound, setNotFound] = useState<boolean>(false);
+  const { updateSort, sort } = useSortProduct();
 
   useEffect(() => {
     const fetchProducts = async () => {
       if (!category) return;
-
       try {
-        const data = await getProductsByCategory(category);
+        const data = await getProductsByCategory(category, sort);
         if (data.length === 0) {
           setNotFound(true);
           setProducts([]);
@@ -34,9 +35,16 @@ export default function ProductsPage() {
         setProducts([]);
       }
     };
-
     fetchProducts();
-  }, [category]);
+  }, [category, sort]);
+
+  // Callback cho DropdownMenu
+  const handleSortChange = (sortOption: {
+    field: string;
+    order: "asc" | "desc";
+  }) => {
+    // updateSort([sortOption]);
+  };
 
   return (
     <div>
@@ -53,9 +61,17 @@ export default function ProductsPage() {
               Sort by
             </button>
             <div className="hidden md:flex items-center gap-3">
-              <button className="btn">Popular</button>
-              <button className="btn">Top sales</button>
-              <DropdownMenu />
+              <button
+                className="btn"
+                onClick={() => updateSort({ field: "createdAt" })}>
+                Latest
+              </button>
+              <button
+                className="btn"
+                onClick={() => updateSort({ field: "numSales" })}>
+                Top sales
+              </button>
+              <DropdownMenu onSortChange={handleSortChange} />
             </div>
           </div>
 

@@ -10,22 +10,33 @@ import { googleLoginRequest } from "@/services/api/auth";
 import { UserSigninInput } from "@/types/index";
 
 type SignInFormProps = {
-  action: (data: UserSigninInput) => void | Promise<void>;
-  error?: string;
+  action: (data: UserSigninInput) => Promise<void>;
 };
 
-const SignInForm = ({ action, error }: SignInFormProps) => {
+const SignInForm = ({ action }: SignInFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setError,
   } = useForm<UserSigninInput>({
     resolver: zodResolver(userSigninSchema),
   });
 
+  const onSubmit = async (data: UserSigninInput) => {
+    try {
+      await action(data);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      setError("root", {
+        message: "Invalid email or password",
+      });
+    }
+  };
+
   return (
     <div className="max-w-sm mx-auto bg-white rounded-lg px-5 py-8 shadow-md">
-      <form onSubmit={handleSubmit(action)} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">Log in</h2>
 
         <div className="space-y-4 mb-4">
@@ -65,8 +76,12 @@ const SignInForm = ({ action, error }: SignInFormProps) => {
                 {errors.password?.message}
               </p>
             )}
-            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
+          {errors.root && (
+            <p className="text-red-500 text-sm mt-1" role="alert">
+              {errors.root?.message}
+            </p>
+          )}
         </div>
 
         <button

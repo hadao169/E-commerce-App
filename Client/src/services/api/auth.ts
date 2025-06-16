@@ -1,6 +1,7 @@
 import { api, privateApi } from "./axios";
 import { LoginResponse, RegisterInput, UserSchema } from "@/types/index";
 import { errorMessage } from "@/lib/utils";
+
 // Register new user, returns user info
 export const registerRequest = async (userData: RegisterInput): Promise<{ user: UserSchema }> => {
   const response = await privateApi.post<{ user: UserSchema }>("/auth/register", userData);
@@ -18,6 +19,9 @@ export const loginRequest = async (
     localStorage.setItem("token", accessToken);
     return { user, accessToken };
   } catch (error: unknown) {
+    //     if (axios.isAxiosError(error) && error.response?.data?.message) {
+    //   throw new Error(error.response.data.message);
+    // }
   throw new Error(errorMessage(error as Error));
 }
 };

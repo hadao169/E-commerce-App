@@ -1,13 +1,22 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname  } from "next/navigation";
 import { Logs, ChevronRight, Star } from "lucide-react";
 import Link from "next/link";
 import { categories } from "../layouts/home/homeMenuData";
+import { useState } from "react";
 
-const Sidebar = () => {
+// type SortOption = {
+//   field: "price" | "avgRating" | "numSales" | "createdAt";
+//   order: "asc" | "desc";
+//   label: string;
+// };
+
+const Sidebar = ( ) => {
   const pathname = usePathname();
   const ratings = [5, 4, 3, 2, 1];
+  const [priceRange, setPriceRange] = useState({ min: "", max: "" });
+
   return (
     <div className="w-full py-4 flex flex-col gap-8 text-[12px] lg:text-[14px]">
       {/* All Categories */}
@@ -61,7 +70,7 @@ const Sidebar = () => {
                     stroke="#f97316"
                   />
                 ))}
-                <span className="ml-2">& Up</span>
+                {stars < 5 && <span className="ml-2">& Up</span>}
               </li>
             ))}
           </ul>
@@ -76,12 +85,20 @@ const Sidebar = () => {
             <input
               type="number"
               placeholder="Min"
+              value={priceRange.min}
+              onChange={(e) =>
+                setPriceRange((prev) => ({ ...prev, min: e.target.value }))
+              }
               className="w-20 px-2 py-1 border rounded text-sm"
             />
             <span>-</span>
             <input
               type="number"
               placeholder="Max"
+              value={priceRange.max}
+              onChange={(e) =>
+                setPriceRange((prev) => ({ ...prev, max: e.target.value }))
+              }
               className="w-20 px-2 py-1 border rounded text-sm"
             />
           </div>
