@@ -99,11 +99,7 @@ export const googleLogin = async (req, res) => {
       sameSite: "lax",
     });
 
-    const redirectUrl = new URL(
-      process.env.NODE_ENV === "production"
-        ? env.CLIENT_URL
-        : "http://localhost:3000"
-    );
+    const redirectUrl = new URL(env.CLIENT_URL);
 
     // const redirectUrl = new URL(redirectUrl);
     redirectUrl.searchParams.set("token", accessToken);

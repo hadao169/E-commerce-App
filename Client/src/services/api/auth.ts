@@ -1,6 +1,7 @@
 import { api, privateApi } from "./axios";
 import { LoginResponse, RegisterInput, UserSchema } from "@/types/index";
 import { errorMessage } from "@/lib/utils";
+import { env } from "process";
 
 // Register new user, returns user info
 export const registerRequest = async (userData: RegisterInput): Promise<{ user: UserSchema }> => {
@@ -29,7 +30,9 @@ export const loginRequest = async (
 // Redirect to Google OAuth login
 export const googleLoginRequest = (): void => {
   if (typeof window !== "undefined") {
-    window.location.href = "http://localhost:4000/api/auth/google";
+    window.location.href = process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_GOOGLE_OAUTH_URL ?? "/"
+      : "http://localhost:4000/api/auth/google";
   }
 };
 
