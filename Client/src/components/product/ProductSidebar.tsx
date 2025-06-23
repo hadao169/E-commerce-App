@@ -6,7 +6,7 @@ import Link from "next/link";
 import { categories } from "../layouts/home/homeMenuData";
 import { useState } from "react";
 
-const Sidebar = ({ onSortChange }) => {
+const Sidebar = ({}) => {
   const pathname = usePathname();
   const ratings = [5, 4, 3, 2, 1];
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
@@ -54,9 +54,9 @@ const Sidebar = ({ onSortChange }) => {
           <ul className="flex flex-col gap-2">
             {ratings.map((stars) => (
               <button
-                onClick={() => {
-                  onSortChange({ field: "avgRating", stars });
-                }}
+                // onClick={() => {
+                //   onSortChange({ field: "avgRating", stars });
+                // }}
                 key={stars}
                 className="flex items-center gap-1 text-gray-700 hover:text-orange-400 cursor-pointer">
                 {Array.from({ length: 5 }).map((_, idx) => (
