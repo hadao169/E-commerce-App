@@ -43,5 +43,15 @@ export type RegisterInput = {
 export type SortOption = {
   field: string;
   order?: "asc" | "desc";
+
 }
+
+export type FilterOption = {
+  category?: string;
+  priceRange?: {
+    min: number;
+    max: number;
+  };
+  avgRating?: number;
+};
 

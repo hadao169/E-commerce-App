@@ -1,7 +1,6 @@
 import { api, privateApi } from "./axios";
 import { LoginResponse, RegisterInput, UserSchema } from "@/types/index";
 import { errorMessage } from "@/lib/utils";
-import { env } from "process";
 
 // Register new user, returns user info
 export const registerRequest = async (userData: RegisterInput): Promise<{ user: UserSchema }> => {

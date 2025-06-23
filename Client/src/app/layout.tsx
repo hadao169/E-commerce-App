@@ -2,6 +2,7 @@ import { AuthProvider } from "@/lib/context/AuthContext";
 import { CartProvider } from "@/lib/context/CartContext";
 import Footer from "@/components/layouts/footer/Footer";
 import "@/styles/globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "E-commerce App",
@@ -26,6 +27,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </CartProvider>
           <Footer />
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );

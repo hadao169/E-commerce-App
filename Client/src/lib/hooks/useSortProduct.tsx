@@ -27,8 +27,6 @@ const useSortProduct = () => {
     } else {
       params.delete("order");
     }
-    console.log("Updated sort params:", params.toString());
-
     // Not strictly necessary, but updating the URL ensures the sort state is shareable and persists across reloads.
     router.push(`?${params.toString()}`);
   };

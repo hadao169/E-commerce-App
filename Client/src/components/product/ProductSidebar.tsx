@@ -6,7 +6,7 @@ import Link from "next/link";
 import { categories } from "../layouts/home/homeMenuData";
 import { useState } from "react";
 
-const Sidebar = () => {
+const Sidebar = ({ onSortChange }) => {
   const pathname = usePathname();
   const ratings = [5, 4, 3, 2, 1];
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
@@ -53,7 +53,10 @@ const Sidebar = () => {
           </h3>
           <ul className="flex flex-col gap-2">
             {ratings.map((stars) => (
-              <li
+              <button
+                onClick={() => {
+                  onSortChange({ field: "avgRating", stars });
+                }}
                 key={stars}
                 className="flex items-center gap-1 text-gray-700 hover:text-orange-400 cursor-pointer">
                 {Array.from({ length: 5 }).map((_, idx) => (
@@ -65,7 +68,7 @@ const Sidebar = () => {
                   />
                 ))}
                 {stars < 5 && <span className="ml-2">& Up</span>}
-              </li>
+              </button>
             ))}
           </ul>
         </div>
@@ -96,7 +99,17 @@ const Sidebar = () => {
               className="w-20 px-2 py-1 border rounded text-sm"
             />
           </div>
-          <button className="w-fit mt-1 px-3 py-1 bg-orange-500 text-white rounded text-sm hover:bg-orange-500 cursor-pointer hover:opacity-80">
+          <button
+            className="w-fit mt-1 px-3 py-1 bg-orange-500 text-white rounded text-sm hover:bg-orange-500 cursor-pointer hover:opacity-80"
+            onClick={() => {
+              // if (priceRange.min || priceRange.max) {
+              //   onSortChange({
+              //     field: "price",
+              //     min: priceRange.min,
+              //     max: priceRange.max,
+              //   });
+              // }
+            }}>
             Apply
           </button>
         </div>
