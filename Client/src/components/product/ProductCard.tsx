@@ -27,7 +27,7 @@ const ProductCard = ({ product }: ProductProp) => {
             <span className="text-[14px] mr-[1px]">$</span>
             {product.price.toLocaleString()}
           </span>
-          <span className="text-sm">{product.countInStock} sold</span>
+          <span className="text-sm">{product.numSales} sold</span>
         </div>
       </div>
     </div>

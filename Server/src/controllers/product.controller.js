@@ -21,6 +21,7 @@ export const getProductByCategory = async (req, res) => {
   // Apply average rating filter
   if (avgRating) {
     filter.avgRating = { $gte: Number(avgRating) };
+    filter.
   }
 
   // Apply price range filter

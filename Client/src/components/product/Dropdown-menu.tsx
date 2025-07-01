@@ -31,7 +31,7 @@ const DropdownMenu = ({ onSortChange, sort }: DropdownMenuProps) => {
                 <li
                   key={order}
                   className={`px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer ${
-                    active ? "bg-orange-500" : "bg-white"
+                    active && "bg-orange-500"
                   }`}
                   onClick={() =>
                     onSortChange({
