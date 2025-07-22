@@ -9,19 +9,21 @@ import Header from "@/components/layouts/header/Header";
 import DropdownMenu from "@/components/product/Dropdown-menu";
 import Sidebar from "@/components/product/ProductSidebar";
 import useSortProduct from "@/lib/hooks/useSortProduct";
+import useFilter from "@/lib/hooks/useFilter";
 
 export default function ProductsPage() {
   const params = useParams();
   const category = params.slug as string;
   const [products, setProducts] = useState<ProductInput[]>([]);
   const [notFound, setNotFound] = useState<boolean>(false);
-  const { updateSort, sort } = useSortProduct();
+  const { sort, updateSort } = useSortProduct();
+  const { filter, updateFilter } = useFilter();
 
   useEffect(() => {
     const fetchProducts = async () => {
       if (!category) return;
       try {
-        const data = await getProductsByCategory(category, sort);
+        const data = await getProductsByCategory(category, sort, filter);
         if (data.length === 0) {
           setNotFound(true);
           setProducts([]);
@@ -36,7 +38,7 @@ export default function ProductsPage() {
       }
     };
     fetchProducts();
-  }, [category, sort]);
+  }, [category, sort, filter]);
 
   // Callback cho DropdownMenu
   const handleSortChange = (sortOption: SortOption) => {
@@ -49,7 +51,7 @@ export default function ProductsPage() {
       <div className="responsive-padding-x bg-gray-100 py-10 flex gap-5">
         {/* Sidebar */}
         <div className="hidden md:block md:w-1/4">
-          <Sidebar />
+          <Sidebar onUpdateFilter={updateFilter} />
         </div>
 
         <div className="w-full md:w-3/4">

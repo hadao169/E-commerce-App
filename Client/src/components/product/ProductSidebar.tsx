@@ -5,11 +5,19 @@ import { Logs, ChevronRight, Star } from "lucide-react";
 import Link from "next/link";
 import { categories } from "../layouts/home/homeMenuData";
 import { useState } from "react";
+import { FilterOption } from "@/types";
 
-const Sidebar = ({}) => {
+const Sidebar = ({
+  onUpdateFilter,
+}: {
+  onUpdateFilter: (filter: FilterOption) => void;
+}) => {
   const pathname = usePathname();
   const ratings = [5, 4, 3, 2, 1];
-  const [priceRange, setPriceRange] = useState({ min: "", max: "" });
+  const [priceRange, setPriceRange] = useState({
+    min: Infinity,
+    max: Infinity,
+  });
 
   return (
     <div className="w-full py-4 flex flex-col gap-8 text-[12px] lg:text-[14px]">
@@ -54,9 +62,9 @@ const Sidebar = ({}) => {
           <ul className="flex flex-col gap-2">
             {ratings.map((stars) => (
               <button
-                // onClick={() => {
-                //   onSortChange({ field: "avgRating", stars });
-                // }}
+                onClick={() => {
+                  onUpdateFilter({ avgRating: stars });
+                }}
                 key={stars}
                 className="flex items-center gap-1 text-gray-700 hover:text-orange-400 cursor-pointer">
                 {Array.from({ length: 5 }).map((_, idx) => (
@@ -84,7 +92,10 @@ const Sidebar = ({}) => {
               placeholder="Min"
               value={priceRange.min}
               onChange={(e) =>
-                setPriceRange((prev) => ({ ...prev, min: e.target.value }))
+                setPriceRange((prev) => ({
+                  ...prev,
+                  min: Number(e.target.value),
+                }))
               }
               className="w-20 px-2 py-1 border rounded text-sm"
             />
@@ -94,7 +105,10 @@ const Sidebar = ({}) => {
               placeholder="Max"
               value={priceRange.max}
               onChange={(e) =>
-                setPriceRange((prev) => ({ ...prev, max: e.target.value }))
+                setPriceRange((prev) => ({
+                  ...prev,
+                  max: Number(e.target.value),
+                }))
               }
               className="w-20 px-2 py-1 border rounded text-sm"
             />
@@ -102,13 +116,10 @@ const Sidebar = ({}) => {
           <button
             className="w-fit mt-1 px-3 py-1 bg-orange-500 text-white rounded text-sm hover:bg-orange-500 cursor-pointer hover:opacity-80"
             onClick={() => {
-              // if (priceRange.min || priceRange.max) {
-              //   onSortChange({
-              //     field: "price",
-              //     min: priceRange.min,
-              //     max: priceRange.max,
-              //   });
-              // }
+              onUpdateFilter({
+                minPrice: priceRange.min,
+                maxPrice: priceRange.max,
+              });
             }}>
             Apply
           </button>

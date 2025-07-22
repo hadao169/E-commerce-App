@@ -1,6 +1,6 @@
 import { ProductInput } from '@/types/index';
 import { api } from './axios';
-import { SortOption } from '@/types/index';
+import { SortOption, FilterOption } from '@/types/index';
 
 export const getAllProducts = async (): Promise<ProductInput[]> => {
   try {
@@ -15,17 +15,28 @@ export const getAllProducts = async (): Promise<ProductInput[]> => {
 
 export const getProductsByCategory = async (
   category: string,
-  sortOption?: SortOption
+  sort?: SortOption,
+  filter?: FilterOption,
 ): Promise<ProductInput[]> => {
   try {
     const params = new URLSearchParams();
-    if (sortOption) {
-      params.set('sortBy', sortOption.field);
-      if (sortOption.order) {
-        params.set('order', sortOption.order);
+    if (sort ) {
+      params.set('sortBy', sort.field);
+      if (sort.order) {
+        params.set('order', sort.order);
       }
     }
-    
+
+    if (filter) {
+      if (filter.avgRating) {
+        params.set('avgRating', filter.avgRating.toString());
+      }
+      if (filter.minPrice !== undefined && filter.maxPrice !== undefined) {
+        params.set('minPrice', filter.minPrice.toString());
+        params.set('maxPrice', filter.maxPrice.toString());
+      }
+    }
+
     const queryString = params.toString();
     const url = `/products/category/${category}${queryString ? `?${queryString}` : ''}`;
     

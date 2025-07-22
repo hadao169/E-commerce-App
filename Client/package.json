@@ -24,7 +24,7 @@
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.508.0",
     "motion": "^12.10.1",
-    "next": "^15.3.2",
+    "next": "^15.3.4",
     "next-auth": "^4.24.11",
     "next-intl": "^4.1.0",
     "react": "^19.0.0",
