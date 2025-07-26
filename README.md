@@ -44,10 +44,10 @@ This application provides a complete e-commerce solution with product browsing, 
   - Role-based access control
 
 - **Product Management**
-<!--
+
   - Browse products by categories
   - Advanced search and filtering
-  - Product details with images, descriptions, and reviews -->
+  - Product details with images, descriptions, and reviews
 
 - **Shopping Experience**
 <!--

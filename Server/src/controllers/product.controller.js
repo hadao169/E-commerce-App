@@ -1,5 +1,5 @@
 import Product from "../models/product.model.js";
-
+import { buildFilter, buildSort } from "../utils/productQueryHelper.js";
 // GET /api/products
 export const getAllProducts = async (req, res) => {
   try {
@@ -13,32 +13,47 @@ export const getAllProducts = async (req, res) => {
 // GET /api/products/category/:category
 export const getProductByCategory = async (req, res) => {
   const { slug } = req.params;
-  const { sortBy, order = "desc", avgRating, minPrice, maxPrice } = req.query;
-  const validSortFields = ["price", "createdAt", "numSales", "avgRating"];
+  const { sortBy, order, avgRating, minPrice, maxPrice } = req.query;
 
   try {
-    const filter = { category: slug };
-
-    if (avgRating) {
-      filter.avgRating = { $gte: Number(avgRating) };
-    }
-
-    // Apply price range filter
-
-    if (minPrice !== undefined || maxPrice !== undefined) {
-      filter.price = {};
-      if (minPrice !== undefined) filter.price.$gte = Number(minPrice);
-      if (maxPrice !== undefined) filter.price.$lte = Number(maxPrice);
-    }
-
-    const sortField = validSortFields.includes(sortBy) ? sortBy : "createdAt";
-    const products = await Product.find(filter).sort({
-      [sortField]: order === "asc" ? 1 : -1,
+    const filter = buildFilter({
+      category: slug,
+      avgRating,
+      minPrice,
+      maxPrice,
     });
-    res.status(200).json(products);
-  } catch (err) {
-    res.status(500).json({ message: "Fail to get sorted products" });
+    const sort = buildSort(sortBy, order);
+
+    const products = await Product.find(filter).sort(sort);
+
+    return res.status(200).json(products);
+  } catch (error) {
+    return res.status(500).json({ message: "Fail to get sorted products" });
   }
 };
+
+// GET /api/products/search?keyword=searchTerm
+
+export const searchProducts = async (req, res) => {
+  const { keyword, sortBy, order, avgRating, minPrice, maxPrice } = req.query;
+
+  try {
+    const filter = buildFilter({
+      keyword,
+      avgRating,
+      minPrice,
+      maxPrice,
+    });
+    const sort = buildSort(sortBy, order);
+
+    const products = await Product.find(filter).sort(sort);
+
+    return res.status(200).json({ products });
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to search products" });
+  }
+};
+
+// GET /api/products/:id
 
 // For admin:

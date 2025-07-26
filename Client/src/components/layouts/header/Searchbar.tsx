@@ -1,22 +1,31 @@
 "use client";
+
 import React, { useState, FormEvent } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Searchbar = () => {
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // You can handle actual search logic here
-    console.log("Search for:", query);
+
+    if (!query.trim()) return; 
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("keyword", query.trim()); 
+    router.push(`/search?${params.toString()}`);
+    setQuery("");
   };
 
   return (
     <form onSubmit={handleSubmit} className="relative">
       <input
         value={query}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
-        className="w-full bg-white placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for your items"
+        className="w-full bg-white placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
       />
       <button
         type="submit"

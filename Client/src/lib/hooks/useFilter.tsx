@@ -1,3 +1,4 @@
+"use client";
 import { FilterOption } from "@/types";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useMemo } from "react";

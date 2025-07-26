@@ -1,10 +1,10 @@
+"use client";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { SortOption } from "@/types";
 
 const useSortProduct = () => {
   const searchParams = useSearchParams();
-  console.log("Current search params:", searchParams.toString());
   const router = useRouter();
 
   const sort = useMemo<SortOption>(() => {

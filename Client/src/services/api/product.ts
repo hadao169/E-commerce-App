@@ -1,6 +1,7 @@
 import { ProductInput } from '@/types/index';
 import { api } from './axios';
 import { SortOption, FilterOption } from '@/types/index';
+import { createProductQuery } from '@/lib/helpers';
 
 export const getAllProducts = async (): Promise<ProductInput[]> => {
   try {
@@ -16,37 +17,33 @@ export const getAllProducts = async (): Promise<ProductInput[]> => {
 export const getProductsByCategory = async (
   category: string,
   sort?: SortOption,
-  filter?: FilterOption,
+  filter?: FilterOption
 ): Promise<ProductInput[]> => {
   try {
-    const params = new URLSearchParams();
-    if (sort ) {
-      params.set('sortBy', sort.field);
-      if (sort.order) {
-        params.set('order', sort.order);
-      }
-    }
-
-    if (filter) {
-      if (filter.avgRating) {
-        params.set('avgRating', filter.avgRating.toString());
-      }
-      if (filter.minPrice !== undefined && filter.maxPrice !== undefined) {
-        params.set('minPrice', filter.minPrice.toString());
-        params.set('maxPrice', filter.maxPrice.toString());
-      }
-    }
-
-    const queryString = params.toString();
-    const url = `/products/category/${category}${queryString ? `?${queryString}` : ''}`;
-    
+    // Ở đây, category là path param, còn các filter/sort để query string
+    const queryString = createProductQuery({ sort, filter });
+    const url = `/products/category/${category}${queryString ? `?${queryString}` : ""}`;
     const { data } = await api.get<ProductInput[]>(url);
     return data;
   } catch (error) {
-    console.error('Failed to fetch products by category:', error);
+    console.error("Failed to fetch products by category:", error);
     throw error;
   }
 };
 
+export const searchProducts = async (
+  keyword: string,
+  sort?: SortOption,
+  filter?: FilterOption
+): Promise<ProductInput[]> => {
+  try {
+    const queryString = createProductQuery({ keyword, sort, filter });
+    const { data } = await api.get<{ products: ProductInput[] }>(`/products/search?${queryString}`);
+    return data.products;
+  } catch (error) {
+    console.error("Failed to search products:", error);
+    throw error;
+  }
+};
 
 
