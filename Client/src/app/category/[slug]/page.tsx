@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { getProductsByCategory } from "@/services/api/product";
 import { ProductInput, SortOption } from "@/types";
 import ProductCard from "@/components/product/ProductCard";
-import Header from "@/components/layouts/header/Header";
+import HeaderWrapper from "@/components/layouts/header/HeaderWrapper";
 import DropdownMenu from "@/components/product/Dropdown-menu";
 import Sidebar from "@/components/product/ProductSidebar";
 import useSortProduct from "@/lib/hooks/useSortProduct";
@@ -47,7 +47,7 @@ export default function ProductsPage() {
 
   return (
     <div>
-      <Header />
+      <HeaderWrapper />
       <div className="responsive-padding-x bg-gray-100 py-10 flex gap-14">
         {/* Sidebar */}
         <div className="hidden lg:block md:w-1/5">

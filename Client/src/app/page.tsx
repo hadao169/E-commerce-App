@@ -1,5 +1,5 @@
 import BannerWrapper from "@/components/layouts/home/BannerWrapper";
-import Header from "@/components/layouts/header/Header";
+import HeaderWrapper from "@/components/layouts/header/HeaderWrapper";
 import ProductGrid from "@/components/product/ProductGrid";
 import { getAllProducts } from "@/services/api/product";
 
@@ -8,7 +8,7 @@ const Homepage = async () => {
   const products = await getAllProducts();
   return (
     <div className="bg-gray-100 pb-10">
-      <Header />
+      <HeaderWrapper />
       <div className="  flex flex-col items-center gap-6">
         <div className="w-full bg-white z-50 py-5 responsive-padding-x text-[15px] transition-opacity duration-200">
           <BannerWrapper />
