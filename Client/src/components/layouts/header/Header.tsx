@@ -1,4 +1,3 @@
-"use client";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiShopee } from "react-icons/si";
 import socialLinks from "@/constants/socialLinks";
