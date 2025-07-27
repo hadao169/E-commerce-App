@@ -54,6 +54,19 @@ export const searchProducts = async (req, res) => {
   }
 };
 
-// GET /api/products/:id
+// GET /api/products/:slug
+export const getProductDetail = async (req, res) => {
+  const { slug } = req.params;
+
+  try {
+    const product = await Product.findOne({ slug });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    return res.status(200).json(product);
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to get product" });
+  }
+};
 
 // For admin:

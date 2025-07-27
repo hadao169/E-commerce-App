@@ -11,6 +11,9 @@ import SearchFilter from "@/components/product/SearchFilterBar";
 import { searchProducts } from "@/services/api/product";
 import { SearchCheck } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import DropDown from "@/components/common/Dropdown-sort";
+import { ArrowDownNarrowWide, SlidersHorizontal } from "lucide-react";
+import DropdownFilter from "@/components/common/Dropdown-filter";
 
 const SearchPage = () => {
   const [products, setProducts] = useState<ProductInput[]>([]);
@@ -53,9 +56,32 @@ const SearchPage = () => {
             &apos;
           </div>
           <div className="px-4 py-3 bg-[#eaebed] flex items-center gap-3 mb-2">
-            <button className="text-custom" disabled>
-              Sort by
-            </button>
+            <div className="flex items-center gap-2 justify-between sm:w-auto w-full">
+              <div className="sm:hidden flex items-center gap-1">
+                <div className="cursor-pointer">
+                  <DropdownFilter
+                    triggerBtn={
+                      <SlidersHorizontal className="text-custom" size={20} />
+                    }
+                    onUpdateFilter={updateFilter}
+                  />
+                </div>
+                <span className="text-custom font-semibold">Filter</span>
+              </div>
+              <button className="text-custom hidden sm:block" disabled>
+                Sort by
+              </button>
+              <div className="sm:hidden">
+                <DropDown
+                  triggerBtn={
+                    <ArrowDownNarrowWide size={22} strokeWidth={1.5} />
+                  }
+                  sort={sort}
+                  onSortChange={updateSort}
+                />
+              </div>
+            </div>
+
             <div className="hidden md:flex items-center gap-3">
               <button
                 className={`btn ${sort.field === "createdAt" ? "bg-orange-500" : "bg-white  "}`}

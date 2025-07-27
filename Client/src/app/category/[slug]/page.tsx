@@ -10,6 +10,9 @@ import DropdownMenu from "@/components/product/Dropdown-menu";
 import Sidebar from "@/components/product/ProductSidebar";
 import useSortProduct from "@/lib/hooks/useSortProduct";
 import useFilter from "@/lib/hooks/useFilter";
+import { ArrowDownNarrowWide, SlidersHorizontal } from "lucide-react";
+import DropDown from "@/components/common/Dropdown-sort";
+import DropdownFilter from "@/components/common/Dropdown-filter";
 
 export default function ProductsPage() {
   const params = useParams();
@@ -56,10 +59,33 @@ export default function ProductsPage() {
 
         <div className="w-full">
           <div className="px-4 py-3 bg-[#eaebed] flex items-center gap-3 mb-2">
-            <button className="text-custom" disabled>
-              Sort by
-            </button>
-            <div className="hidden md:flex items-center gap-3">
+            <div className="flex items-center gap-2 justify-between sm:w-auto w-full">
+              <div className="sm:hidden flex items-center gap-1">
+                <div className="cursor-pointer">
+                  <DropdownFilter
+                    triggerBtn={
+                      <SlidersHorizontal className="text-custom" size={20} />
+                    }
+                    onUpdateFilter={updateFilter}
+                  />
+                </div>
+                <span className="text-custom font-semibold">Filter</span>
+              </div>
+              <button className="text-custom hidden sm:block" disabled>
+                Sort by
+              </button>
+              <div className="sm:hidden">
+                <DropDown
+                  triggerBtn={
+                    <ArrowDownNarrowWide size={22} strokeWidth={1.5} />
+                  }
+                  sort={sort}
+                  onSortChange={updateSort}
+                />
+              </div>
+            </div>
+
+            <div className="hidden sm:flex items-center gap-3">
               <button
                 className={`btn ${sort.field === "createdAt" ? "bg-orange-500" : "bg-white  "}`}
                 onClick={() => updateSort({ field: "createdAt" })}>

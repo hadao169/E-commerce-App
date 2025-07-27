@@ -3,11 +3,13 @@ import {
   getAllProducts,
   getProductByCategory,
   searchProducts,
+  getProductDetail,
 } from "../controllers/product.controller.js";
 const router = express.Router();
 
 router.get("/", getAllProducts);
 router.get("/category/:slug", getProductByCategory);
 router.get("/search", searchProducts);
+router.get("/:slug", getProductDetail);
 
 export default router;
