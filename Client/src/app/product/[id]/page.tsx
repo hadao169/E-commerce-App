@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import ProductDetailPage from "./ProductDetailPage";
 import { getProductDetail } from "@/services/api/product";
-import { use } from "react";
 
 // Next.js App Router page function
 export default async function Page({
