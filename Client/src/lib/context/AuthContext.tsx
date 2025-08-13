@@ -96,6 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       return false;
     } catch (error) {
+      console.error(error);
       throw new Error("An unexpected error occurred");
     }
   };

@@ -2,13 +2,8 @@ import { notFound } from "next/navigation";
 import ProductDetailPage from "./ProductDetailPage";
 import { getProductDetail } from "@/services/api/product";
 
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function Page({ params }: ProductPageProps) {
+// Next.js App Router page function
+export default async function Page({ params }: { params: { id: string } }) {
   try {
     const product = await getProductDetail(params.id);
     return <ProductDetailPage product={product} />;
