@@ -2,18 +2,16 @@ import { notFound } from "next/navigation";
 import ProductDetailPage from "./ProductDetailPage";
 import { getProductDetail } from "@/services/api/product";
 
-// Next.js App Router page function
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string }; // plain object
 }) {
   try {
-    const { id } = await params;
-    const product = await getProductDetail(id);
-    return <ProductDetailPage product={product} />;
+    const product = await getProductDetail(params.id); // fetch data
+    return <ProductDetailPage product={product} />; // pass resolved data
   } catch (error) {
-    console.error("Error fetching product:", error);
-    notFound();
+    console.error(error);
+    notFound(); // fallback 404
   }
 }
