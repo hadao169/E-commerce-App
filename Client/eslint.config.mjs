@@ -13,10 +13,7 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      // ❌ Tắt rule gốc (JS)
       "no-unused-vars": "off",
-
-      // ✅ Bật rule TS + cho phép ignore biến bắt đầu bằng "_"
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {
@@ -24,6 +21,7 @@ const eslintConfig = [
           argsIgnorePattern: "^_",
         },
       ],
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ];

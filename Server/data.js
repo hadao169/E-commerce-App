@@ -7,6 +7,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/sports-accessories/american-football/1.webp",
     price: 19.99,
+    discount: 15,
     description:
       "The American Football is a classic ball used in American football games. It is designed for throwing and catching, making it an essential piece of equipment for the sport.",
     countInStock: 53,
@@ -33,6 +34,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/sports-accessories/baseball-ball/1.webp",
     price: 8.99,
+    discount: 25,
     description:
       "The Baseball Ball is a standard baseball used in baseball games. It features a durable leather cover and is designed for pitching, hitting, and fielding in the game of baseball.",
     countInStock: 100,
@@ -59,6 +61,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/sports-accessories/baseball-glove/1.webp",
     price: 24.99,
+    discount: 30,
     description:
       "The Baseball Glove is a protective glove worn by baseball players. It is designed to catch and field the baseball, providing players with comfort and control during the game.",
     countInStock: 22,
@@ -85,6 +88,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/sports-accessories/basketball/1.webp",
     price: 14.99,
+    discount: 20,
     description:
       "The Basketball is a standard ball used in basketball games. It is designed for dribbling, shooting, and passing in the game of basketball, suitable for both indoor and outdoor play.",
     countInStock: 75,
@@ -111,6 +115,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/sports-accessories/basketball-rim/1.webp",
     price: 39.99,
+    discount: 10,
     description:
       "The Basketball Rim is a sturdy hoop and net assembly mounted on a basketball backboard. It provides a target for shooting and scoring in the game of basketball.",
     countInStock: 43,
@@ -137,6 +142,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/sports-accessories/cricket-ball/1.webp",
     price: 12.99,
+    discount: 35,
     description:
       "The Cricket Ball is a hard leather ball used in the sport of cricket. It is bowled and batted in the game, and its hardness and seam contribute to the dynamics of cricket play.",
     countInStock: 30,
@@ -163,6 +169,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/thumbnail.webp",
     price: 129.99,
+    discount: 15,
     description:
       "The Black Women's Gown is an elegant and timeless evening gown. With a sleek black design, it's perfect for formal events and special occasions, exuding sophistication and style.",
     countInStock: 25,
@@ -189,6 +196,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/thumbnail.webp",
     price: 89.99,
+    discount: 40,
     description:
       "The Corset Leather With Skirt is a bold and edgy ensemble that combines a stylish corset with a matching skirt. Ideal for fashion-forward individuals, it makes a statement at any event.",
     countInStock: 30,
@@ -215,6 +223,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/womens-dresses/corset-with-black-skirt/thumbnail.webp",
     price: 79.99,
+    discount: 25,
     description:
       "The Corset With Black Skirt is a chic and versatile outfit that pairs a fashionable corset with a classic black skirt. It offers a trendy and coordinated look for various occasions.",
     countInStock: 33,
@@ -241,6 +250,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/womens-dresses/dress-pea/thumbnail.webp",
     price: 49.99,
+    discount: 30,
     description:
       "The Dress Pea is a stylish and comfortable dress with a pea pattern. Perfect for casual outings, it adds a playful and fun element to your wardrobe, making it a great choice for day-to-day wear.",
     countInStock: 6,
@@ -267,6 +277,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/womens-dresses/marni-red-&-black-suit/thumbnail.webp",
     price: 179.99,
+    discount: 20,
     description:
       "The Marni Red & Black Suit is a sophisticated and fashion-forward suit ensemble. With a combination of red and black tones, it showcases a modern design for a bold and confident look.",
     countInStock: 62,
@@ -293,6 +304,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/1.webp",
     price: 29.99,
+    discount: 15,
     description:
       "The Blue & Black Check Shirt is a stylish and comfortable men's shirt featuring a classic check pattern. Made from high-quality fabric, it's suitable for both casual and semi-formal occasions.",
     countInStock: 38,
@@ -319,6 +331,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/1.webp",
     price: 24.99,
+    discount: 40,
     description:
       "The Gigabyte Aorus Men Tshirt is a cool and casual shirt for gaming enthusiasts. With the Aorus logo and sleek design, it's perfect for expressing your gaming style.",
     countInStock: 90,
@@ -345,6 +358,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/1.webp",
     price: 34.99,
+    discount: 25,
     description:
       "The Man Plaid Shirt is a timeless and versatile men's shirt with a classic plaid pattern. Its comfortable fit and casual style make it a wardrobe essential for various occasions.",
     countInStock: 82,
@@ -371,6 +385,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/1.webp",
     price: 19.99,
+    discount: 30,
     description:
       "The Man Short Sleeve Shirt is a breezy and stylish option for warm days. With a comfortable fit and short sleeves, it's perfect for a laid-back yet polished look.",
     countInStock: 2,
@@ -397,6 +412,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/1.webp",
     price: 27.99,
+    discount: 20,
     description:
       "The Men Check Shirt is a classic and versatile shirt featuring a stylish check pattern. Suitable for various occasions, it adds a smart and polished touch to your wardrobe.",
     countInStock: 95,
@@ -423,6 +439,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp",
     price: 1099.99,
+    discount: 10,
     description:
       "The iPhone 13 Pro is the latest Apple flagship smartphone featuring advanced camera technology, A15 Bionic chip, and a stunning OLED display.",
     countInStock: 56,
@@ -449,6 +466,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/smartphones/iphone-x/thumbnail.webp",
     price: 899.99,
+    discount: 15,
     description:
       "The iPhone X is a flagship smartphone featuring a bezel-less OLED display, facial recognition technology (Face ID), and impressive performance. It represents a milestone in iPhone design and innovation.",
     countInStock: 37,
@@ -475,6 +493,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/thumbnail.webp",
     price: 249.99,
+    discount: 35,
     description:
       "The Oppo A57 is a mid-range smartphone known for its sleek design and capable features. It offers a balance of performance and affordability, making it a popular choice.",
     countInStock: 19,
@@ -501,6 +520,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/smartphones/oppo-f19-pro-plus/thumbnail.webp",
     price: 399.99,
+    discount: 20,
     description:
       "The Oppo F19 Pro Plus is a feature-rich smartphone with a focus on camera capabilities. It boasts advanced photography features and a powerful performance for a premium user experience.",
     countInStock: 78,
@@ -520,7 +540,6 @@ const data = [
     },
     reviews: [],
   },
- 
   {
     name: "Green Crystal Earring",
     slug: "green-crystal-earring",
@@ -528,6 +547,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/womens-jewellery/green-crystal-earring/thumbnail.webp",
     price: 29.99,
+    discount: 25,
     description:
       "The Green Crystal Earring is a dazzling accessory that features a vibrant green crystal. With a classic design, it adds a touch of elegance to your ensemble, perfect for formal or special occasions.",
     countInStock: 54,
@@ -554,6 +574,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/womens-jewellery/green-oval-earring/thumbnail.webp",
     price: 24.99,
+    discount: 30,
     description:
       "The Green Oval Earring is a stylish and versatile accessory with a unique oval shape. Whether for casual or dressy occasions, its green hue and contemporary design make it a standout piece.",
     countInStock: 73,
@@ -580,6 +601,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/womens-jewellery/tropical-earring/thumbnail.webp",
     price: 19.99,
+    discount: 40,
     description:
       "The Tropical Earring is a fun and playful accessory inspired by tropical elements. Featuring vibrant colors and a lively design, it's perfect for adding a touch of summer to your look.",
     countInStock: 1,
@@ -606,6 +628,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/thumbnail.webp",
     price: 1899.99,
+    discount: 15,
     description:
       "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials for a comfortable and stylish bedroom.",
     countInStock: 88,
@@ -632,6 +655,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/thumbnail.webp",
     price: 2499.99,
+    discount: 20,
     description:
       "The Annibale Colombo Sofa is a sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room.",
     countInStock: 60,
@@ -658,6 +682,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/thumbnail.webp",
     price: 299.99,
+    discount: 25,
     description:
       "The Bedside Table in African Cherry is a stylish and functional addition to your bedroom, providing convenient storage space and a touch of elegance.",
     countInStock: 64,
@@ -684,6 +709,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/thumbnail.webp",
     price: 499.99,
+    discount: 30,
     description:
       "The Knoll Saarinen Executive Conference Chair is a modern and ergonomic chair, perfect for your office or conference room with its timeless design.",
     countInStock: 26,
@@ -710,6 +736,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/thumbnail.webp",
     price: 799.99,
+    discount: 10,
     description:
       "The Wooden Bathroom Sink with Mirror is a unique and stylish addition to your bathroom, featuring a wooden sink countertop and a matching mirror.",
     countInStock: 7,
@@ -736,6 +763,7 @@ const data = [
     image:
       "https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/thumbnail.webp",
     price: 89.99,
+    discount: 35,
     description:
       "The Brown Leather Belt Watch is a stylish timepiece with a classic design. Featuring a genuine leather strap and a sleek dial, it adds a touch of sophistication to your look.",
     countInStock: 32,
@@ -771,7 +799,9 @@ export const products = data.map((product) => {
     Furniture: "furniture",
   };
 
-  const isClothing = ["women-dresses", "men-shirts"].includes(product.category);
+  const isClothing = ["women-dresses", "mens-shirts"].includes(
+    product.category
+  );
   const isSmartphone = product.category === "smartphones";
 
   return {
@@ -779,7 +809,11 @@ export const products = data.map((product) => {
     slug: slugify(product.name),
     category: categoryMapping[product.category] || product.category,
     sizes: isClothing ? ["S", "M", "L", "XL"] : [],
-    colors: isSmartphone ? ["Blue", "Black", "White"] : [],
+    colors: isClothing
+      ? ["white", "black", "red", "lightblue"]
+      : isSmartphone
+      ? ["Blue", "Black", "White"]
+      : [],
   };
 });
 // console.log(products.length);

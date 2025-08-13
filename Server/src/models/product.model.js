@@ -23,6 +23,9 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    discount: {
+      type: Number,
+    },
     description: {
       type: String,
     },
@@ -38,7 +41,7 @@ const productSchema = new mongoose.Schema(
     },
     colors: {
       type: [String],
-      enum: ["Red", "Blue", "Green", "Black", "White"],
+      enum: [],
       default: [],
     },
     isPublished: {

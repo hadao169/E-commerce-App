@@ -46,4 +46,17 @@ export const searchProducts = async (
   }
 };
 
+export const getProductDetail = async (id: string): Promise<ProductInput> => {
+  try {
+    const { data } = await api.get<{ product: ProductInput }>(`/products/${id}`);
+    if (!data.product) {
+      throw new Error('Product not found');
+    }
+    return data.product;
+  } catch (error) {
+    console.error(error);
+    throw error; // Re-throw the error to be caught by the component
+  }
+}
+
 

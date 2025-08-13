@@ -9,7 +9,10 @@ const Homepage = async () => {
   const products = await getAllProducts();
   return (
     <div className="bg-gray-100 pb-10">
-      <Suspense fallback={<div className="w-full h-20 bg-gray-200 animate-pulse"></div>}>
+      <Suspense
+        fallback={
+          <div className="w-full h-20 bg-gray-200 animate-pulse"></div>
+        }>
         <Header />
       </Suspense>
       <div className="  flex flex-col items-center gap-6">

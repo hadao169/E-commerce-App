@@ -54,16 +54,16 @@ export const searchProducts = async (req, res) => {
   }
 };
 
-// GET /api/products/:slug
+// GET /api/products/:id
 export const getProductDetail = async (req, res) => {
-  const { slug } = req.params;
+  const { id } = req.params;
 
   try {
-    const product = await Product.findOne({ slug });
+    const product = await Product.findOne({ _id: id });
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
-    return res.status(200).json(product);
+    return res.status(200).json({ product });
   } catch (error) {
     return res.status(500).json({ message: "Failed to get product" });
   }

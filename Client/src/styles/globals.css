@@ -81,6 +81,14 @@ body {
   .text-custom{
     @apply text-sm md:text-[16px]
   }
+
+
+}
+
+.text-outline{
+  color: white;
+  -webkit-text-stroke: 0.5px #facc15; /* yellow-400 */
+  text-shadow: 0.5px #facc15; /* fallback */
 }
 
 .footer {

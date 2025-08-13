@@ -1,25 +1,28 @@
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function cn(...inputs: any[]) {
   return twMerge(clsx(inputs));
 }
 
-// export function formatPrice(price, locale = "en") {
-//   return new Intl.NumberFormat(locale, {
-//     style: "currency",
-//     currency: locale === "en" ? "Euro" : "VND",
-//   }).format(price);
-// }
+export function formatPrice(price: number, locale = "en") {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: locale === "en" ? "EUR" : "VND",
+  }).format(price);
+}
 
-// export function formatDate(date, locale = "en") {
-//   return new Intl.DateTimeFormat(locale, {
-//     year: "numeric",
-//     month: "long",
-//     day: "numeric",
-//   }).format(new Date(date));
-// }
+type MonthFormat = 'short' | 'long';
+export function formatDate(
+  date: Date,
+  language: string = 'en-US',
+  monthFormat: MonthFormat = 'short'
+): string {
+  return date.toLocaleDateString(language, {
+    day: '2-digit',
+    month: monthFormat,
+  }).replace('/', ' ');
+}
 
 export function errorMessage(error: Error) {
   if (error instanceof Error) {

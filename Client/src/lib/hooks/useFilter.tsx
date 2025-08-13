@@ -2,6 +2,7 @@
 import { FilterOption } from "@/types";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
+
 const useFilter = () => {
   const searchParams = useSearchParams();
   const router = useRouter();

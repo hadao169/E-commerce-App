@@ -25,8 +25,6 @@ export const userSignupSchema = z
     path: ["confirmPassword"],
   });
 
-
-
 const Price = (field: string) =>
   z.coerce
     .number()
@@ -34,6 +32,20 @@ const Price = (field: string) =>
       (val) => /^\d+(\.\d{2})?$/.test(val.toFixed(2)),
       `${field} must have exactly two decimal places (e.g., 49.99)`
     );
+
+
+export const ReviewInputSchema = z.object({
+  productId: z.string().min(1, "Product ID is required"),
+  userId: z.string().min(1, "User ID is required"),
+  comment: z.string()
+    .min(10, "Review must be at least 10 characters")
+    .max(500, "Review cannot exceed 500 characters"),
+  rating: z.number()
+    .min(1, "Rating must be at least 1")
+    .max(5, "Rating cannot exceed 5")
+    .default(5),
+  isVerifiedPurchase: z.boolean().default(false)
+});
 
 const MongoId = z
   .string()
@@ -44,8 +56,11 @@ export const ProductInputSchema = z.object({
   name: z.string().min(3),
   slug: z.string().min(3),
   category: z.string().min(1),
-  image: z.string().url({ message: "Image must be a valid URL" }),
+  image: 
+    z.string().url({ message: "Each image must be a valid URL" })
+  ,
   price: Price("Price"),
+  discount: z.number().int().nonnegative(),
   description: z.string().min(1),
   isPublished: z.boolean(),
   // listPrice: Price("List price"),
@@ -56,12 +71,13 @@ export const ProductInputSchema = z.object({
   colors: z.array(z.string()).default([]),
   avgRating: z.coerce.number().min(0).max(5), // optional for filtering and sorting
   numReviews: z.coerce.number().int().nonnegative(),
-  ratingDistribution: z
+  rateDistribution: z
     .array(z.object({ rating: z.number(), count: z.number() }))
     .max(5), // store how many reviews for each rating (1-5)
-  // reviews: z.array(ReviewInputSchema).default([]),
+  reviews: z.array(ReviewInputSchema).default([]),
 });
 
 export const ProductUpdateSchema = ProductInputSchema.extend({
   _id: MongoId,
 });
+

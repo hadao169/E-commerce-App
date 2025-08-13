@@ -10,6 +10,6 @@ const router = express.Router();
 router.get("/", getAllProducts);
 router.get("/category/:slug", getProductByCategory);
 router.get("/search", searchProducts);
-router.get("/:slug", getProductDetail);
+router.get("/:id", getProductDetail);
 
 export default router;

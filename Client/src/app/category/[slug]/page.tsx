@@ -14,6 +14,7 @@ import { ArrowDownNarrowWide, SlidersHorizontal } from "lucide-react";
 import DropDown from "@/components/common/Dropdown-sort";
 import DropdownFilter from "@/components/common/Dropdown-filter";
 
+
 export default function ProductsPage() {
   const params = useParams();
   const category = params.slug as string;

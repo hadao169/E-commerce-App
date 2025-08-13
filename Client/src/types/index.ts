@@ -1,10 +1,11 @@
-import { userSigninSchema, userSignupSchema, ProductInputSchema } from "@/lib/validation";
+import { userSigninSchema, userSignupSchema, ProductInputSchema, ReviewInputSchema } from "@/lib/validation";
 import { z } from "zod";
 
 // Information typed in from the user
 export type UserSigninInput = z.infer<typeof userSigninSchema>;
 export type UserSignupInput = z.infer<typeof userSignupSchema>;
 export type ProductInput = z.infer<typeof ProductInputSchema>;
+export type ReviewInput = z.infer<typeof ReviewInputSchema>;
 
 export interface UserSchema {
   id: string;
@@ -51,3 +52,7 @@ export type FilterOption = {
   avgRating?: number;
 };
 
+export type ProductDetailsProps = {
+  productType: string;
+  product: ProductInput;
+}

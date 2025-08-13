@@ -60,14 +60,14 @@ export const UserInputSchema = z.object({
 });
 
 //REVIEW
-// export const ReviewInputSchema = z.object({
-//   product: MongoId,
-//   user: MongoId,
-//   isVerifiedPurchase: z.boolean(),
-//   title: z.string().min(1, "Title is required"),
-//   comment: z.string().min(1, "Comment is required"),
-//   rating: z.coerce.number().int().min(1).max(5),
-// });
+export const ReviewInputSchema = z.object({
+  product: MongoId,
+  user: MongoId,
+  isVerifiedPurchase: z.boolean(),
+  title: z.string().min(1, "Title is required"),
+  comment: z.string().min(1, "Comment is required"),
+  rating: z.coerce.number().int().min(1).max(5),
+});
 
 //PRODUCT
 export const ProductInputSchema = z.object({
@@ -76,6 +76,7 @@ export const ProductInputSchema = z.object({
   category: z.string().min(1),
   image: z.string().url({ message: "Image must be a valid URL" }),
   price: Price("Price"),
+  discount: z.number().int().nonnegative(),
   description: z.string().min(1),
   isPublished: z.boolean(),
   // listPrice: Price("List price"),
