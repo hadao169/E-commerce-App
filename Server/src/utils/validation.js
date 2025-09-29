@@ -61,12 +61,13 @@ export const UserInputSchema = z.object({
 
 //REVIEW
 export const ReviewInputSchema = z.object({
-  product: MongoId,
-  user: MongoId,
+  productId: MongoId,
+  userId: MongoId,
   isVerifiedPurchase: z.boolean(),
   title: z.string().min(1, "Title is required"),
   comment: z.string().min(1, "Comment is required"),
   rating: z.coerce.number().int().min(1).max(5),
+  createdAt: z.date().default(new Date()),
 });
 
 //PRODUCT

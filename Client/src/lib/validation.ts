@@ -33,10 +33,17 @@ const Price = (field: string) =>
       `${field} must have exactly two decimal places (e.g., 49.99)`
     );
 
+const MongoId = z
+  .string()
+  .regex(/^[a-fA-F0-9]{24}$/, "Invalid MongoDB ObjectId");
+
 
 export const ReviewInputSchema = z.object({
   productId: z.string().min(1, "Product ID is required"),
-  userId: z.string().min(1, "User ID is required"),
+  userId: z.object({
+    _id: MongoId,
+    username: z.string().min(1, "Username is required")
+  }),
   comment: z.string()
     .min(10, "Review must be at least 10 characters")
     .max(500, "Review cannot exceed 500 characters"),
@@ -44,12 +51,10 @@ export const ReviewInputSchema = z.object({
     .min(1, "Rating must be at least 1")
     .max(5, "Rating cannot exceed 5")
     .default(5),
-  isVerifiedPurchase: z.boolean().default(false)
+  isVerifiedPurchase: z.boolean().default(false),
+  createdAt: z.date().default(new Date()),
 });
 
-const MongoId = z
-  .string()
-  .regex(/^[a-fA-F0-9]{24}$/, "Invalid MongoDB ObjectId");
 // Product
 export const ProductInputSchema = z.object({
   _id:MongoId,
@@ -80,4 +85,6 @@ export const ProductInputSchema = z.object({
 export const ProductUpdateSchema = ProductInputSchema.extend({
   _id: MongoId,
 });
+
+
 

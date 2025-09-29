@@ -1,4 +1,4 @@
-import { ProductInput } from '@/types/index';
+import { ProductInput, ReviewInput } from '@/types/index';
 import { api } from './axios';
 import { SortOption, FilterOption } from '@/types/index';
 import { createProductQuery } from '@/lib/helpers';
@@ -59,4 +59,12 @@ export const getProductDetail = async (id: string): Promise<ProductInput> => {
   }
 }
 
-
+export const getProductReviews = async (id: string): Promise<ReviewInput[]> => {
+  try {
+    const { data } = await api.get<{ reviews: ReviewInput[] }>(`/products/${id}/reviews`);
+    return data.reviews;
+  } catch (error) { 
+    console.error("Failed to fetch product reviews:", error);
+    throw error;
+  }
+};

@@ -1,5 +1,13 @@
 import dotenv from "dotenv";
-dotenv.config({ path: ".env.local" });
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env file from root directory 
+dotenv.config({ path: path.join(__dirname, "../../.env") });
+
 const requiredEnv = [
   "JWT_SECRET",
   "JWT_REFRESH_SECRET",

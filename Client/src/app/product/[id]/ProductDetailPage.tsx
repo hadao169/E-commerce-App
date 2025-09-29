@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/layouts/header/Header";
@@ -11,15 +11,16 @@ import { formatPrice } from "@/lib/utils";
 import CountDownTimer from "@/components/common/CountDown";
 import { TicketPercent, ShoppingCart } from "lucide-react";
 import ProductDetails from "@/components/product/ProductSelection";
-import { ProductInput } from "@/types";
+import { ProductInput, ReviewInput } from "@/types";
 import ProductDescription from "@/components/product/ProductDescription";
 import ProductReview from "@/components/product/ProductReview";
 
 interface ProductDetailPageProps {
   product: ProductInput; // Using your Product interface
+  reviews: ReviewInput[]; // Add reviews prop
 }
 
-const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
+const ProductDetailPage = ({ product, reviews }: ProductDetailPageProps) => {
   // const [selectedImage, setSelectedImage] = useState(0);
 
   return (
@@ -186,7 +187,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 
         {/* Reviews Section */}
         <div className="w-full">
-          {/* <ProductReview product={product} /> */}
+          <ProductReview product={product} reviews={reviews} />
         </div>
       </div>
     </div>

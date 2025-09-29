@@ -125,7 +125,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       router.push("/signin");
     }
   };
-
+  
   const value = {
     user,
     login,

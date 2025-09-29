@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import ProductDetailPage from "./ProductDetailPage";
-import { getProductDetail } from "@/services/api/product";
+import { getProductDetail, getProductReviews } from "@/services/api/product";
+import { console } from "inspector";
 
 export default async function Page({
   params,
@@ -10,7 +11,8 @@ export default async function Page({
   try {
     const { id } = await params;
     const product = await getProductDetail(id); // fetch data
-    return <ProductDetailPage product={product} />; // pass resolved data
+    const reviews = await getProductReviews(id);
+    return <ProductDetailPage product={product} reviews={reviews} />; // pass resolved data
   } catch (error) {
     console.error(error);
     notFound(); // fallback 404

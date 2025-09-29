@@ -1,4 +1,4 @@
-import { slugify } from "./src/utils/formatters.js";
+import { slugify } from "../src/utils/formatters.js";
 const data = [
   {
     name: "American Football",

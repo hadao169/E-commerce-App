@@ -5,6 +5,7 @@ import env from "./config/env.js";
 import { errorHandler } from "./middleware/error.middleware.js";
 import authRouter from "./routes/auth.routes.js";
 import productRouter from "./routes/product.routes.js";
+import userRouter from "./routes/user.routes.js";
 import "./config/database.js";
 import cors from "cors";
 import corsOptions from "./config/cors.js";
@@ -27,6 +28,7 @@ app.use(morgan("dev"));
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
 // Error handling
 app.use(errorHandler);
 
